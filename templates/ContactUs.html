@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Phoenix Pixels Studios - Get in touch for web development, IoT solutions, and cloud services">
+    <meta name="keywords" content="contact, Phoenix Pixels Studios, web development, IoT, cloud solutions">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Contact Us | Phoenix Pixels Studios</title>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-logo">
+            <a href="#">
+                <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+            </a>
+        </div>
+
+        <ul class="nav-link">
+            <li id="link0" class="link0"><a href="{{ url_for('home') }}#hero">Home</a></li>
+            <li id="link1" class="link1"><a href="{{ url_for('home') }}#what-we-do">Services</a></li>
+            <li id="link2" class="link2"><a href="{{ url_for('home') }}#pricing">Pricing</a></li>
+            <li id="link3" class="link3"><a href="{{ url_for('home') }}#footer">About</a></li>
+        </ul>
+        
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <button class="btn"><a href="{{ url_for('home') }}">Home</a></button>
+    </nav>
+
+    <!-- Contact Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <h4>GET IN TOUCH</h4>
+            <h1>Let's Build Something <span>Amazing Together</span></h1>
+            <p>Have a project in mind? We'd love to hear from you. Fill out the form below or reach out directly.</p>
+        </div>
+    </section>
+
+    <!-- Contact Content Section -->
+    <section class="contact-content container">
+        <div class="contact-grid">
+            <!-- Contact Form -->
+            <div class="contact-form-wrapper">
+                <h2>Send Us a Message</h2>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Your name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+91 XXXXXXXXXX">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service">Service Interested In</label>
+                        <select id="service" name="service">
+                            <option value="">Select a service</option>
+                            <option value="web">Web Development</option>
+                            <option value="iot">IoT Solutions</option>
+                            <option value="cloud">Cloud Infrastructure</option>
+                            <option value="consulting">Technical Consulting</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" name="message" rows="6" required placeholder="Tell us about your project..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info-wrapper">
+                <h2>Contact Information</h2>
+                
+                <div class="contact-info-card">
+                    <div class="info-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Email Us</h3>
+                        <p>phoenixpixelsinc@gmail.com</p>
+                        <p class="info-note">We'll respond within 24 hours</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-card">
+                    <div class="info-icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Call Us</h3>
+                        <p>+91 XXXXXXXXXX</p>
+                        <p class="info-note">Mon-Sat, 9:00 AM - 7:00 PM IST</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-card">
+                    <div class="info-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Location</h3>
+                        <p>Registered Indian Startup</p>
+                        <p class="info-note">MSME Certified | Shop Act Registered</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-card">
+                    <div class="info-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Business Hours</h3>
+                        <p>Monday - Saturday</p>
+                        <p class="info-note">9:00 AM - 7:00 PM IST</p>
+                    </div>
+                </div>
+
+                <div class="contact-socials">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="container">
+        <span class="blur"></span>
+        <span class="blur"></span>
+        <div class="column">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+            </div>
+            <p>
+                Phoenix Pixels Studios is a registered Indian startup delivering modern web development, IoT systems, and cloud-powered solutions. 
+                We focus on performance, clean design, and technology that helps businesses grow.
+            </p>
+            <p>
+                <strong>Your vision. Our technology. Let's build something great.</strong>
+            </p>
+            <div class="socials">
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
+            </div>
+        </div>
+        <div class="column">
+            <h4>Services</h4>
+            <a href="{{ url_for('home') }}#pricing">Web Development</a>
+            <a href="{{ url_for('home') }}#pricing">IoT Solutions</a>
+            <a href="{{ url_for('home') }}#pricing">Cloud Infrastructure</a>
+            <a href="{{ url_for('home') }}#pricing">Technical Consulting</a>
+        </div>
+        <div class="column">
+            <h4>Company</h4>
+            <a href="#">About Us</a>
+            <a href="#">Partners</a>
+            <a href="#">Sponsors</a>
+            <a href="#">Careers</a>
+        </div>
+        <div class="column">
+            <h4>Support</h4>
+            <a href="{{ url_for('contact_page') }}">Contact Us</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <p>MSME Registered (Udyam) | Shop Act Certified Business</p>
+        <p>© 2025 Phoenix Pixels Studios. All Rights Reserved.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
