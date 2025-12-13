@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Web Development Services - Phoenix Pixels Studios. Custom websites, landing pages, and e-commerce solutions.">
+    <meta name="keywords" content="web development, website design, e-commerce, landing pages, Phoenix Pixels Studios">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Web Development | Phoenix Pixels Studios</title>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-logo">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+            </a>
+        </div>
+
+        <ul class="nav-link">
+            <li id="link0" class="link0"><a href="{{ url_for('home') }}#hero">Home</a></li>
+            <li id="link1" class="link1"><a href="{{ url_for('home') }}#what-we-do">Services</a></li>
+            <li id="link2" class="link2"><a href="{{ url_for('home') }}#pricing">Pricing</a></li>
+            <li id="link3" class="link3"><a href="{{ url_for('home') }}#footer">About</a></li>
+        </ul>
+        
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <button class="btn"><a href="{{ url_for('contact_page') }}">Contact Me</a></button>
+    </nav>
+
+    <header class="container" style="min-height: 60vh; padding-top: 5rem;">
+        <div class="content">
+            <span class="blur"></span>
+            <span class="blur"></span>
+            <h4>WEB DEVELOPMENT SERVICES</h4>
+            <h1>Build a Website That Works for <span>Your Business</span></h1>
+            <p>
+                We design fast, mobile-friendly, and professional websites for small businesses, startups, and growing brands.
+                From simple landing pages to full business websites, we handle everything end-to-end.
+            </p>
+            <a href="{{ url_for('contact_page') }}?service=web" class="btn1" style="display: inline-block; text-align: center; text-decoration: none;">Start Your Project</a>
+        </div>
+        <div class="image">
+            <!-- You might want to update this image later with a specific web dev image -->
+             <div style="font-size: 15rem; color: var(--phoenix-orange); text-align: center; opacity: 0.8;">
+                <i class="fa-solid fa-code"></i>
+             </div>
+        </div>
+    </header>
+
+    <section id="what-we-offer" class="container">
+        <h2 class="header">WHAT WE OFFER</h2>
+        <div class="features">
+            <div class="card">
+                <span><i class="fa-solid fa-laptop-code"></i></span>
+                <h4>Business Websites & Landing Pages</h4>
+                <p>High-converting landing pages and professional business sites to showcase your brand.</p>
+            </div> 
+            <div class="card">
+                <span><i class="fa-solid fa-user-tie"></i></span>
+                <h4>Portfolio & Personal Websites</h4>
+                <p>Stand out with a personal brand website that highlights your skills and achievements.</p>
+            </div>
+            <div class="card">
+                <span><i class="fa-solid fa-layer-group"></i></span>
+                <h4>Static & Dynamic Websites</h4>
+                <p>From simple informational sites to complex data-driven applications.</p>
+            </div>
+            <div class="card">
+                <span><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                <h4>Website Redesign & Optimization</h4>
+                <p>Revamp your existing site for better performance, aesthetics, and SEO.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="what-you-get" class="container" style="margin-top: 2rem;">
+        <h2 class="header">WHAT YOU GET</h2>
+        <div class="pricing">
+             <div class="card">
+                <div class="content">
+                    <h4><i class="fa-solid fa-wand-magic"></i> Design</h4>
+                    <h3>Clean Modern UI</h3>
+                    <p>Visually stunning designs that reflect your brand identity.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <h4><i class="fa-solid fa-mobile-screen"></i> Responsive</h4>
+                    <h3>Mobile Design</h3>
+                    <p>Looks perfect on phones, tablets, and desktops.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                     <h4><i class="fa-solid fa-bolt"></i> Performance</h4>
+                    <h3>Fast Loading</h3>
+                    <p>SEO-ready structure and optimized code for speed.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <h4><i class="fa-solid fa-address-book"></i> Connect</h4>
+                    <h3>Integrations</h3>
+                    <p>WhatsApp chat & contact form integration included.</p>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 4rem;">
+            <a href="{{ url_for('contact_page') }}?service=web" class="btn1" style="display: inline-block; text-align: center; text-decoration: none;">Start Your Project</a>
+        </div>
+    </section>
+
+    <footer id="footer" class="container">
+        <span class="blur"></span>
+        <span class="blur"></span>
+        <div class="column">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+            </div>
+            <p>
+                Phoenix Pixels Studios is a registered Indian startup delivering modern web development, IoT systems, and cloud-powered solutions. 
+                We focus on performance, clean design, and technology that helps businesses grow.
+            </p>
+            <p>
+                <strong>Your vision. Our technology. Let's build something great.</strong>
+            </p>
+            <div class="socials">
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
+            </div>
+        </div>
+        <div class="column">
+            <h4>Services</h4>
+            <a href="{{ url_for('home') }}#pricing">Web Development</a>
+            <a href="{{ url_for('home') }}#pricing">IoT Solutions</a>
+            <a href="{{ url_for('home') }}#pricing">Cloud Infrastructure</a>
+            <a href="{{ url_for('home') }}#pricing">Technical Consulting</a>
+        </div>
+        <div class="column">
+            <h4>Company</h4>
+            <a href="#">About Us</a>
+            <a href="#">Partners</a>
+            <a href="#">Sponsors</a>
+            <a href="#">Careers</a>
+        </div>
+        <div class="column">
+            <h4>Support</h4>
+            <a href="{{ url_for('contact_page') }}">Contact Us</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <p>MSME Registered (Udyam) | Shop Act Certified Business</p>
+        <p>© 2025 Phoenix Pixels Studios. All Rights Reserved.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>    
+</body>
+</html>

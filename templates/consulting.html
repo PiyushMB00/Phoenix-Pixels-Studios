@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Technical Consulting - Phoenix Pixels Studios. Expert advice on tech stack, project planning, and software architecture.">
+    <meta name="keywords" content="technical consulting, software architecture, tech stack advice, startup guidance, Phoenix Pixels Studios">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Technical Consulting | Phoenix Pixels Studios</title>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-logo">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+            </a>
+        </div>
+
+        <ul class="nav-link">
+            <li id="link0" class="link0"><a href="{{ url_for('home') }}#hero">Home</a></li>
+            <li id="link1" class="link1"><a href="{{ url_for('home') }}#what-we-do">Services</a></li>
+            <li id="link2" class="link2"><a href="{{ url_for('home') }}#pricing">Pricing</a></li>
+            <li id="link3" class="link3"><a href="{{ url_for('home') }}#footer">About</a></li>
+        </ul>
+        
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <button class="btn"><a href="{{ url_for('contact_page') }}">Contact Me</a></button>
+    </nav>
+
+    <header class="container" style="min-height: 60vh; padding-top: 5rem;">
+        <div class="content">
+            <span class="blur"></span>
+            <span class="blur"></span>
+            <h4>TECHNICAL CONSULTING</h4>
+            <h1>Clear Technical Advice <span>Before You Build</span></h1>
+            <p>
+                Not sure what to build or how to build it? We provide honest, practical guidance so you don’t waste time or money.
+                Start on the right foot.
+            </p>
+            <a href="{{ url_for('contact_page') }}?service=consulting" class="btn1" style="display: inline-block; text-align: center; text-decoration: none;">Book a Free Consultation</a>
+        </div>
+        <div class="image">
+             <div style="font-size: 15rem; color: var(--phoenix-orange); text-align: center; opacity: 0.8;">
+                <i class="fa-solid fa-comments"></i>
+             </div>
+        </div>
+    </header>
+
+    <section id="we-help-with" class="container">
+        <h2 class="header">WE HELP WITH</h2>
+        <div class="features">
+            <div class="card">
+                <span><i class="fa-solid fa-layer-group"></i></span>
+                <h4>Tech Stack Selection</h4>
+                <p>Understand the pros and cons of different technologies for your specific goals.</p>
+            </div> 
+            <div class="card">
+                <span><i class="fa-solid fa-compass-drafting"></i></span>
+                <h4>Architecture Planning</h4>
+                <p>Plan a scalable and maintainable structure for your software project.</p>
+            </div>
+            <div class="card">
+                <span><i class="fa-solid fa-wallet"></i></span>
+                <h4>Cost Efficiency</h4>
+                <p>Optimize resource usage to keep development and operational costs low.</p>
+            </div>
+            <div class="card">
+                <span><i class="fa-solid fa-triangle-exclamation"></i></span>
+                <h4>Risk Avoidance</h4>
+                <p>Identify and mitigate common pitfalls in software development early on.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="perfect-for" class="container" style="margin-top: 2rem;">
+        <h2 class="header">PERFECT FOR</h2>
+        <div class="pricing">
+             <div class="card">
+                <div class="content">
+                    <h4><i class="fa-solid fa-lightbulb"></i> Startup</h4>
+                    <h3>Founders</h3>
+                    <p>First-time founders needing technical direction.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <h4><i class="fa-solid fa-graduation-cap"></i> Academic</h4>
+                    <h3>Students</h3>
+                    <p>Guidance on final year projects and learning paths.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                     <h4><i class="fa-solid fa-briefcase"></i> Business</h4>
+                    <h3>Small Biz</h3>
+                    <p>Traditional businesses looking to digitize operations.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 4rem;">
+            <a href="{{ url_for('contact_page') }}?service=consulting" class="btn1" style="display: inline-block; text-align: center; text-decoration: none;">Book a Free Consultation</a>
+        </div>
+    </section>
+
+    <footer id="footer" class="container">
+        <span class="blur"></span>
+        <span class="blur"></span>
+        <div class="column">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+            </div>
+            <p>
+                Phoenix Pixels Studios is a registered Indian startup delivering modern web development, IoT systems, and cloud-powered solutions. 
+                We focus on performance, clean design, and technology that helps businesses grow.
+            </p>
+            <p>
+                <strong>Your vision. Our technology. Let's build something great.</strong>
+            </p>
+            <div class="socials">
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
+            </div>
+        </div>
+        <div class="column">
+            <h4>Services</h4>
+            <a href="{{ url_for('home') }}#pricing">Web Development</a>
+            <a href="{{ url_for('home') }}#pricing">IoT Solutions</a>
+            <a href="{{ url_for('home') }}#pricing">Cloud Infrastructure</a>
+            <a href="{{ url_for('home') }}#pricing">Technical Consulting</a>
+        </div>
+        <div class="column">
+            <h4>Company</h4>
+            <a href="#">About Us</a>
+            <a href="#">Partners</a>
+            <a href="#">Sponsors</a>
+            <a href="#">Careers</a>
+        </div>
+        <div class="column">
+            <h4>Support</h4>
+            <a href="{{ url_for('contact_page') }}">Contact Us</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <p>MSME Registered (Udyam) | Shop Act Certified Business</p>
+        <p>© 2025 Phoenix Pixels Studios. All Rights Reserved.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>    
+</body>
+</html>

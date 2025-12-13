@@ -77,6 +77,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
     
     if (contactForm) {
+        // Pre-select service based on URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceParam = urlParams.get('service');
+        if (serviceParam) {
+            const serviceSelect = document.getElementById('service');
+            if (serviceSelect) {
+                serviceSelect.value = serviceParam;
+            }
+        }
+
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             

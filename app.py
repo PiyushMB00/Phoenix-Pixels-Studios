@@ -139,5 +139,22 @@ def contact():
         print("Error inserting:", e)
         return jsonify({"status": "error", "message": "Server error."}), 500
 
+
+@app.route("/web-development")
+def web_development():
+    return render_template("web_development.html")
+
+@app.route("/iot-solutions")
+def iot_solutions():
+    return render_template("iot_solutions.html")
+
+@app.route("/cloud-infrastructure")
+def cloud_infrastructure():
+    return render_template("cloud_infrastructure.html")
+
+@app.route("/consulting")
+def consulting():
+    return render_template("consulting.html")
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
