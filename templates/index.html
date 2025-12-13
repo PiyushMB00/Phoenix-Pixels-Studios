@@ -1,267 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Phoenix Pixels Studios - Professional web development, game prototypes, and digital solutions. Creating exceptional digital experiences with cutting-edge technology.">
-    <meta name="keywords" content="web development, game development, UI/UX design, digital solutions, Phoenix Pixels Studios">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>Phoenix Pixels Studios | Professional Web Developers</title>
-</head>
+{% block title %}Phoenix Pixels Studios | Modern Web & IoT Solutions{% endblock %}
 
-<body>
+{% block meta_description %}Phoenix Pixels Studios is a top-tier Indian startup specializing in custom web development, IoT solutions, and cloud infrastructure. Build your digital future with us.{% endblock %}
 
-    <nav>
-        <div class="nav-logo">
-            <a href="#">
-                <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
-            </a>
-        </div>
+{% block meta_keywords %}web development company, IoT startup India, cloud integration, custom software, Phoenix Pixels Studios{% endblock %}
 
-        <ul class="nav-link">
-            <li id="link0" class="link0"><a href="{{ url_for('home') }}#hero">Home</a></li>
-            <li id="link1" class="link1"><a href="{{ url_for('home') }}#what-we-do">Services</a></li>
-            <li id="link2" class="link2"><a href="{{ url_for('home') }}#pricing">Pricing</a></li>
-            <li id="link3" class="link3"><a href="{{ url_for('home') }}#footer">About</a></li>
-        </ul>
-        
-        <button class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        
-        <button class="btn"><a href="{{ url_for('contact_page') }}">Contact Me</a></button>
-    </nav>
-
-   <header id="hero" class="container">
+{% block content %}
+<header id="hero" class="container">
     <div class="content">
         <span class="blur"></span>
         <span class="blur"></span>
         <h4>INNOVATIVE DIGITAL SOLUTIONS</h4>
         <h1>We Build Modern <span>Websites, Apps & Digital Solutions</span></h1>
         <p>
-            An officially registered startup delivering modern web development, IoT solutions, and cloud integration. 
+            An officially registered startup delivering modern web development, IoT solutions, and cloud integration.
             We combine creativity with strong technical skill to help businesses go digital with confidence.
         </p>
-        <button class="btn1">Start Your Project</button>
+        <button class="btn1"><a href="{{ url_for('contact_page') }}">Start Your Project</a></button>
     </div>
     <div class="image">
-        <img src="{{ url_for('static', filename='images/header.png') }}">
+        <img src="{{ url_for('static', filename='images/hero_final.png') }}">
     </div>
-   </header>
+</header>
 
-    <section id="what-we-do" class="container">
-        <h2 class="header">WHAT WE DO</h2>
-        <div class="features">
-            <div class="card">
-                <span><i class="fa-solid fa-code"></i></span>
-                <h4>Web Development</h4>
-                <p>
-                    Modern, responsive websites and web applications crafted with the latest technologies.
-                    We build everything from simple landing pages to full business websites designed to perform fast and look professional.
-                    <strong>Quality-first. Secure. Mobile-ready.</strong>
-                </p>
-                <a href="{{ url_for('web_development') }}">Get Started <i class="fa-solid fa-arrow-right"></i></a>
-            </div> 
-            <div class="card">
-                <span><i class="fa-solid fa-microchip"></i></span>
-                <h4>IoT Solutions</h4>
-                <p>
-                    Smart device integration and systems that connect the physical and digital world.
-                    We build sensor-based automation, monitoring systems, and real-time dashboards for homes and small businesses.
-                    <strong>Turning everyday objects into smart systems.</strong>
-                </p>
-                <a href="{{ url_for('iot_solutions') }}">Explore IoT <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-            <div class="card">
-                <span><i class="fa-solid fa-cloud"></i></span>
-                <h4>Cloud Infrastructure</h4>
-                <p>
-                    Scalable cloud solutions powered by AWS, Azure, or Google Cloud.
-                    We help you deploy servers, automate tasks, store data securely, and build cloud setups that grow with your business.
-                    <strong>Reliable. Secure. Cost-efficient.</strong>
-                </p>
-                <a href="{{ url_for('cloud_infrastructure') }}">Learn More <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-            <div class="card">
-                <span><i class="fa-solid fa-lightbulb"></i></span>
-                <h4>Technical Consulting</h4>
-                <p>
-                    Clear, practical guidance on technology decisions, digital strategy, and project planning.
-                    We help you choose the right tools, avoid mistakes, and move your project forward with confidence.
-                    <strong>Smart solutions. Honest advice.</strong>
-                </p>
-                <a href="{{ url_for('consulting') }}">Get Advice <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing" class="container">
-        <h2 class="header">PRICING PACKAGES</h2>
-        <p class="sub-header">
-            All packages include responsive design, modern UI, SEO-ready structure, and dedicated support.
-        </p>
-        <div class="pricing">
-            <div class="card">
-                <div class="content">
-                    <h4>⭐ Standard</h4>
-                    <h3>₹6,999</h3>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        3 Professionally Designed Pages
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Fully Mobile-Responsive
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        WhatsApp Button Integration
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Contact Form Setup
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Essential Speed Optimization
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Up to 2 Revisions • Delivery: 5–7 Days
-                    </p>
-                </div>
-                <button class="btn">Order Now</button>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h4>⭐⭐ Premium</h4>
-                    <h3>₹14,999</h3>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Up to 6 Pages
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Modern Animated UI + Premium Layout
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Hosting + Domain Setup
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Razorpay Payment Integration
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        WhatsApp Inquiry Automation
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Starter Store (up to 10 Products)
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Enhanced Speed Optimization
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Up to 4 Revisions • Delivery: 7–12 Days
-                    </p>
-                </div>
-                <button class="btn">Order Now</button>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h4>⭐⭐⭐ Custom</h4>
-                    <h3>₹24,999+</h3>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Unlimited Pages
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Full E-commerce Store
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Custom Dashboard / API Integration
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Automation + Cloud Setup
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Any Custom Functionality
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Unlimited Revisions
-                    </p>
-                    <p>
-                        <i class="fa-regular fa-circle-check"></i>
-                        Delivery Time Based on Project Scope
-                    </p>
-                </div>
-                <button class="btn">Contact Us</button>
-            </div>
-        </div>
-    </section>
-
-    <footer id="footer" class="container">
-        <span class="blur"></span>
-        <span class="blur"></span>
-        <div class="column">
-            <div class="logo">
-                <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
-            </div>
+<section id="what-we-do" class="container">
+    <h2 class="header">WHAT WE DO</h2>
+    <div class="features">
+        <div class="card">
+            <span><i class="fa-solid fa-code"></i></span>
+            <h4>Web Development</h4>
             <p>
-                Phoenix Pixels Studios is a registered Indian startup delivering modern web development, IoT systems, and cloud-powered solutions. 
-                We focus on performance, clean design, and technology that helps businesses grow.
+                Modern, responsive websites and web applications crafted with the latest technologies.
+                We build everything from simple landing pages to full business websites designed to perform fast and
+                look professional.
+                <strong>Quality-first. Secure. Mobile-ready.</strong>
             </p>
+            <a href="{{ url_for('web_development') }}">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="card">
+            <span><i class="fa-solid fa-microchip"></i></span>
+            <h4>IoT Solutions</h4>
             <p>
-                <strong>Your vision. Our technology. Let's build something great.</strong>
+                Smart device integration and systems that connect the physical and digital world.
+                We build sensor-based automation, monitoring systems, and real-time dashboards for homes and small
+                businesses.
+                <strong>Turning everyday objects into smart systems.</strong>
             </p>
-            <div class="socials">
-                <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
-            </div>
+            <a href="{{ url_for('iot_solutions') }}">Explore IoT <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        <div class="column">
-            <h4>Services</h4>
-            <a href="{{ url_for('web_development') }}">Web Development</a>
-            <a href="{{ url_for('iot_solutions') }}">IoT Solutions</a>
-            <a href="{{ url_for('cloud_infrastructure') }}">Cloud Infrastructure</a>
-            <a href="{{ url_for('consulting') }}">Technical Consulting</a>
+        <div class="card">
+            <span><i class="fa-solid fa-cloud"></i></span>
+            <h4>Cloud Infrastructure</h4>
+            <p>
+                Scalable cloud solutions powered by AWS, Azure, or Google Cloud.
+                We help you deploy servers, automate tasks, store data securely, and build cloud setups that grow with
+                your business.
+                <strong>Reliable. Secure. Cost-efficient.</strong>
+            </p>
+            <a href="{{ url_for('cloud_infrastructure') }}">Learn More <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        <div class="column">
-            <h4>Company</h4>
-            <a href="#">About Us</a>
-            <a href="#">Partners</a>
-            <a href="#">Sponsors</a>
-            <a href="#">Careers</a>
+        <div class="card">
+            <span><i class="fa-solid fa-lightbulb"></i></span>
+            <h4>Technical Consulting</h4>
+            <p>
+                Clear, practical guidance on technology decisions, digital strategy, and project planning.
+                We help you choose the right tools, avoid mistakes, and move your project forward with confidence.
+                <strong>Smart solutions. Honest advice.</strong>
+            </p>
+            <a href="{{ url_for('consulting') }}">Get Advice <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        <div class="column">
-            <h4>Support</h4>
-            <a href="{{ url_for('contact_page') }}">Contact Us</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms & Conditions</a>
-        </div>
-    </footer>
-
-    <div class="copyright">
-        <p>MSME Registered (Udyam) | Shop Act Certified Business</p>
-        <p>© 2025 Phoenix Pixels Studios. All Rights Reserved.</p>
     </div>
+</section>
 
-
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>    
-</body>
-</html>
+<section id="pricing" class="container">
+    <h2 class="header">PRICING PACKAGES</h2>
+    <p class="sub-header">
+        All packages include responsive design, modern UI, SEO-ready structure, and dedicated support.
+    </p>
+    <div class="pricing">
+        <div class="card">
+            <div class="content">
+                <h4>⭐ Standard</h4>
+                <h3>₹6,999</h3>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    3 Professionally Designed Pages
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Fully Mobile-Responsive
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    WhatsApp Button Integration
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Contact Form Setup
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Essential Speed Optimization
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Up to 2 Revisions • Delivery: 5–7 Days
+                </p>
+            </div>
+            <button class="btn"><a href="{{ url_for('contact_page') }}">Contact Us</a></button>
+        </div>
+        <div class="card">
+            <div class="content">
+                <h4>⭐⭐ Premium</h4>
+                <h3>₹14,999</h3>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Up to 6 Pages
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Modern Animated UI + Premium Layout
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Hosting + Domain Setup
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Razorpay Payment Integration
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    WhatsApp Inquiry Automation
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Starter Store (up to 10 Products)
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Enhanced Speed Optimization
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Up to 4 Revisions • Delivery: 7–12 Days
+                </p>
+            </div>
+            <button class="btn"><a href="{{ url_for('contact_page') }}">Contact Us</a></button>
+        </div>
+        <div class="card">
+            <div class="content">
+                <h4>⭐⭐⭐ Custom</h4>
+                <h3>₹24,999+</h3>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Unlimited Pages
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Full E-commerce Store
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Custom Dashboard / API Integration
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Automation + Cloud Setup
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Any Custom Functionality
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Unlimited Revisions
+                </p>
+                <p>
+                    <i class="fa-regular fa-circle-check"></i>
+                    Delivery Time Based on Project Scope
+                </p>
+            </div>
+            <button class="btn"><a href="{{ url_for('contact_page') }}">Contact Us</a></button>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -156,5 +156,29 @@ def cloud_infrastructure():
 def consulting():
     return render_template("consulting.html")
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/partners")
+def partners():
+    return render_template("partners.html")
+
+@app.route("/sponsors")
+def sponsors():
+    return render_template("sponsors.html")
+
+@app.route("/careers")
+def careers():
+    return render_template("careers.html")
+
+@app.route("/privacy-policy")
+def privacy_policy():
+    return render_template("support/privacy_policy.html")
+
+@app.route("/terms-conditions")
+def terms_conditions():
+    return render_template("support/terms_conditions.html")
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

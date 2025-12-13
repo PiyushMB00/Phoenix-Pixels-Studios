@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Sponsors | Phoenix Pixels Studios{% endblock %}
+
+{% block meta_description %}Our sponsors and supporters who help us drive innovation in the tech space.{% endblock %}
+
+{% block meta_keywords %}tech sponsors, startup funding, innovation partners{% endblock %}
+
+{% block content %}
+<header class="container" style="min-height: 60vh; padding-top: 5rem;">
+    <div class="content">
+        <span class="blur"></span>
+        <span class="blur"></span>
+        <h4>SPONSORSHIPS</h4>
+        <h1>Supporting <span>Innovation</span></h1>
+        <p>
+            We are proud to be supported by organizations that share our vision for a digital future.
+        </p>
+        <a href="{{ url_for('contact_page') }}" class="btn1" style="display: inline-block; text-align: center; text-decoration: none;">Sponsor Us</a>
+    </div>
+    <div class="image">
+         <div style="font-size: 15rem; color: var(--phoenix-orange); text-align: center; opacity: 0.8;">
+            <i class="fa-solid fa-heart"></i>
+         </div>
+    </div>
+</header>
+
+<section class="container" style="margin-top: 2rem; margin-bottom: 5rem;">
+    <h2 class="header">OUR SPONSORS</h2>
+    <div style="text-align: center; padding: 4rem; background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border-subtle);">
+        <p style="font-size: 1.5rem; color: var(--text-secondary);">
+            Coming Soon...
+        </p>
+    </div>
+</section>
+{% endblock %}

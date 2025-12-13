@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Phoenix Pixels Studios | Professional Web Developers{% endblock %}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% block meta_description %}Phoenix Pixels Studios is a registered Indian startup delivering modern web development, IoT systems, and cloud-powered solutions.{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}web development, IoT solutions, cloud infrastructure, technical consulting, software startup, Phoenix Pixels Studios{% endblock %}">
+    <meta name="author" content="Phoenix Pixels Studios">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:title" content="{{ self.title() }}">
+    <meta property="og:description" content="{{ self.meta_description() }}">
+    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='images/hero_final.png', _external=True) }}{% endblock %}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ request.url }}">
+    <meta property="twitter:title" content="{{ self.title() }}">
+    <meta property="twitter:description" content="{{ self.meta_description() }}">
+    <meta property="twitter:image" content="{{ self.og_image() }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-logo">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+                <span class="mobile-brand-name">Phoenix Pixels Studios</span>
+            </a>
+        </div>
+
+        <ul class="nav-link">
+            <li id="link0" class="link0"><a href="{{ url_for('home') }}#hero">Home</a></li>
+            <li id="link1" class="link1"><a href="{{ url_for('home') }}#what-we-do">Services</a></li>
+            <li id="link2" class="link2"><a href="{{ url_for('home') }}#pricing">Pricing</a></li>
+            <li id="link3" class="link3"><a href="{{ url_for('about') }}">About</a></li>
+        </ul>
+
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <button class="btn"><a href="{{ url_for('contact_page') }}">Contact Me</a></button>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <footer id="footer" class="container">
+        <span class="blur"></span>
+        <span class="blur"></span>
+        <div class="column">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+                <span>Phoenix Pixels Studios</span>
+            </div>
+            <p>
+                Phoenix Pixels Studios is a registered Indian startup delivering modern web development, IoT systems,
+                and cloud-powered solutions.
+                We focus on performance, clean design, and technology that helps businesses grow.
+            </p>
+            <p>
+                <strong>Your vision. Our technology. Let's build something great.</strong>
+            </p>
+            <!-- <div class="socials">
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
+            </div> -->
+        </div>
+        <div class="column">
+            <h4>Services</h4>
+            <a href="{{ url_for('web_development') }}">Web Development</a>
+            <a href="{{ url_for('iot_solutions') }}">IoT Solutions</a>
+            <a href="{{ url_for('cloud_infrastructure') }}">Cloud Infrastructure</a>
+            <a href="{{ url_for('consulting') }}">Technical Consulting</a>
+        </div>
+        <div class="column">
+            <h4>Company</h4>
+            <a href="{{ url_for('about') }}">About Us</a>
+            <a href="{{ url_for('partners') }}">Partners</a>
+            <a href="{{ url_for('sponsors') }}">Sponsors</a>
+            <a href="{{ url_for('careers') }}">Careers</a>
+        </div>
+        <div class="column">
+            <h4>Support</h4>
+            <a href="{{ url_for('contact_page') }}">Contact Us</a>
+            <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('terms_conditions') }}">Terms & Conditions</a>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <p>MSME Registered (Udyam) | Shop Act Certified Business</p>
+        <p>© 2025 Phoenix Pixels Studios. All Rights Reserved.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
