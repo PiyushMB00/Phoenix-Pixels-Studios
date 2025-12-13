@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}About Us | Phoenix Pixels Studios{% endblock %}
+
+{% block content %}
+<section class="contact-hero">
+    <div class="container">
+        <h4>COMPANY</h4>
+        <h1>About <span>Us</span></h1>
+        <p>Phoenix Pixels Studios is an MSME-registered Indian startup delivering modern digital solutions.</p>
+    </div>
+</section>
+
+<section class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+        <div>
+            <h2 class="header" style="text-align: left;">Who We Are</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.1rem;">
+                We are a passionate team of developers, designers, and innovators. We believe in the power of technology
+                to transform businesses and improve lives. As a registered startup, we are committed to excellence and
+                professional delivery.
+            </p>
+            <h4 style="color: var(--phoenix-gold); margin-bottom: 0.5rem;">Certifications</h4>
+            <div style="display: flex; gap: 1rem;">
+                <span class="btn"
+                    style="padding: 0.5rem 1rem; font-size: 0.8rem; background: var(--bg-card); cursor: default;">MSME
+                    (Udyam)</span>
+                <span class="btn"
+                    style="padding: 0.5rem 1rem; font-size: 0.8rem; background: var(--bg-card); cursor: default;">Shop
+                    Act</span>
+            </div>
+        </div>
+        <div style="display: grid; gap: 2rem;">
+            <div
+                style="background: var(--bg-card); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-subtle);">
+                <h4 style="color: var(--phoenix-gold); margin-bottom: 0.5rem;">Our Mission</h4>
+                <p style="color: var(--text-secondary);">To empower businesses with scalable, reliable, and innovative
+                    technology.</p>
+            </div>
+            <div
+                style="background: var(--bg-card); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-subtle);">
+                <h4 style="color: var(--phoenix-gold); margin-bottom: 0.5rem;">Our Vision</h4>
+                <p style="color: var(--text-secondary);">To be a trusted global technology partner known for quality and
+                    integrity.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container" style="margin-top: 3rem; margin-bottom: 3rem;">
+    <h2 class="header">Our Values</h2>
+    <div class="features">
+        <div class="card">
+            <span><i class="fa-solid fa-star"></i></span>
+            <h4>Quality</h4>
+            <p>We never compromise on the quality of our code or design.</p>
+        </div>
+        <div class="card">
+            <span><i class="fa-regular fa-handshake"></i></span>
+            <h4>Transparency</h4>
+            <p>Clear communication and honest dealings with our clients.</p>
+        </div>
+        <div class="card">
+            <span><i class="fa-solid fa-lightbulb"></i></span>
+            <h4>Innovation</h4>
+            <p>Always exploring new technologies to better serve you.</p>
+        </div>
+        <div class="card">
+            <span><i class="fa-solid fa-users"></i></span>
+            <h4>Client Success</h4>
+            <p>Your growth is our success. We are in this together.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
