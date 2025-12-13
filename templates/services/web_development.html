@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Web Development | Phoenix Pixels Studios{% endblock %}
+
+{% block content %}
+<section class="contact-hero">
+    <div class="container">
+        <h4>SERVICES</h4>
+        <h1>Web <span>Development</span></h1>
+        <p>Custom, scalable, and performance-optimized web solutions tailored to business needs.</p>
+    </div>
+</section>
+
+<section class="container">
+    <h2 class="header">What We Offer</h2>
+    <div class="features">
+        <div class="card">
+            <span><i class="fa-solid fa-laptop-code"></i></span>
+            <h4>Static & Dynamic Websites</h4>
+            <p>Fast, secure, and SEO-friendly websites that represent your brand perfectly.</p>
+        </div>
+        <div class="card">
+            <span><i class="fa-solid fa-layer-group"></i></span>
+            <h4>Full-stack Web Applications</h4>
+            <p>Complex web apps with robust backends and interactive frontends.</p>
+        </div>
+        <div class="card">
+            <span><i class="fa-solid fa-cart-shopping"></i></span>
+            <h4>E-commerce Platforms</h4>
+            <p>Online stores with secure payment gateways and inventory management.</p>
+        </div>
+        <div class="card">
+            <span><i class="fa-solid fa-mobile-screen"></i></span>
+            <h4>Progressive Web Apps (PWAs)</h4>
+            <p>Web apps that offer a native mobile-like experience.</p>
+        </div>
+    </div>
+</section>
+
+<section class="container" style="margin-top: 3rem;">
+    <h2 class="header">Technologies</h2>
+    <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+        <span class="btn" style="cursor: default; background: var(--bg-card); color: var(--phoenix-orange);">React /
+            Next.js</span>
+        <span class="btn" style="cursor: default; background: var(--bg-card); color: var(--phoenix-orange);">Node.js /
+            Express</span>
+        <span class="btn" style="cursor: default; background: var(--bg-card); color: var(--phoenix-orange);">MongoDB /
+            PostgreSQL</span>
+        <span class="btn" style="cursor: default; background: var(--bg-card); color: var(--phoenix-orange);">Tailwind /
+            Bootstrap</span>
+    </div>
+</section>
+
+<section class="container" style="margin-top: 3rem;">
+    <h2 class="header">Our Process</h2>
+    <div style="text-align: center; color: var(--text-secondary); font-size: 1.1rem;">
+        <p>Requirement Analysis <i class="fa-solid fa-arrow-right"
+                style="color: var(--phoenix-orange); margin: 0 10px;"></i> UI/UX Design <i
+                class="fa-solid fa-arrow-right" style="color: var(--phoenix-orange); margin: 0 10px;"></i> Development
+            <i class="fa-solid fa-arrow-right" style="color: var(--phoenix-orange); margin: 0 10px;"></i> Testing <i
+                class="fa-solid fa-arrow-right" style="color: var(--phoenix-orange); margin: 0 10px;"></i> Deployment
+        </p>
+    </div>
+</section>
+
+<section class="container" style="text-align: center; margin-top: 3rem; margin-bottom: 3rem;">
+    <button class="btn1"><a href="{{ url_for('contact_page') }}" style="color: inherit;">Request a Quote</a></button>
+</section>
+{% endblock %}

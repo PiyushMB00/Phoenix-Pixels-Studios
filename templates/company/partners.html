@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Partners | Phoenix Pixels Studios{% endblock %}
+
+{% block content %}
+<section class="contact-hero">
+    <div class="container">
+        <h4>COMPANY</h4>
+        <h1>Our <span>Partners</span></h1>
+        <p>Showcasing collaborations and our growing ecosystem.</p>
+    </div>
+</section>
+
+<section class="container">
+    <h2 class="header">Technology Partners</h2>
+    <p class="sub-header">Collaborating with industry leaders to bring you the best.</p>
+    <div class="features">
+        <div class="card">
+            <span><i class="fa-solid fa-server"></i></span>
+            <h4>Cloud Providers</h4>
+            <p>AWS, Google Cloud, DigitalOcean</p>
+        </div>
+        <div class="card">
+            <span><i class="fa-solid fa-microchip"></i></span>
+            <h4>Hardware Vendors</h4>
+            <p>Leading IoT component suppliers</p>
+        </div>
+        <div class="card">
+            <span><i class="fa-solid fa-layer-group"></i></span>
+            <h4>Platforms</h4>
+            <p>SaaS and PaaS solutions</p>
+        </div>
+    </div>
+</section>
+
+<section class="container" style="margin-top: 3rem;">
+    <h2 class="header">Academic & Community</h2>
+    <div class="features">
+        <div class="card">
+            <span><i class="fa-solid fa-graduation-cap"></i></span>
+            <h4>Colleges</h4>
+            <p>Partnering with top institutions for R&D.</p>
+        </div>
+        <div class="card">
+            <span><i class="fa-solid fa-seedling"></i></span>
+            <h4>Incubators</h4>
+            <p>Supporting the startup ecosystem.</p>
+        </div>
+        <div class="card">
+            <span><i class="fa-solid fa-users"></i></span>
+            <h4>Developer Communities</h4>
+            <p>Contributing to open source and knowledge sharing.</p>
+        </div>
+    </div>
+</section>
+
+<section class="container" style="margin-top: 3rem;">
+    <div
+        style="background: var(--bg-card); padding: 3rem; border-radius: 20px; border: 1px solid var(--border-subtle); text-align: center;">
+        <h2 style="color: var(--text-primary); font-family: 'Playfair Display', serif; margin-bottom: 1rem;">Why Partner
+            With Us?</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Mutual growth, innovation, and long-term
+            collaboration are at our core.</p>
+        <button class="btn1"><a href="{{ url_for('contact_page') }}" style="color: inherit;">Become a
+                Partner</a></button>
+    </div>
+</section>
+{% endblock %}
