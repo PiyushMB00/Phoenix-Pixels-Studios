@@ -69,7 +69,7 @@ def send_auto_reply(client_email, client_name):
         return
 
     subject = "Thank you for contacting us"
-    body = f"Hello {client_name},\n\nThank you for contacting us. We appreciate you taking the time to reach out, Our team has received your message and will get back to you shortly with further information or assistance as needed.\nThank you once again for connecting with us.\n\nRegards,\nPhoenix Pixels Studio"
+    body = f"Hello {client_name},\n\nThank you for contacting Phoenix Pixels Studio. We truly appreciate you taking the time to reach out to us and for showing interest in our services.\n\nThis is to inform you that our team has successfully received your message. We are currently reviewing the details you have shared, and one of our team members will get back to you shortly with further information or assistance as needed.\n\nIf you have any additional details to share or if your inquiry is urgent, please feel free to reply to this email. We will be happy to assist you.\n\nThank you once again for connecting with us. We look forward to working with you.\n\nRegards,\nPhoenix Pixels Studio"
 
     msg = MIMEMultipart()
     msg['From'] = EMAIL_SENDER
