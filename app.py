@@ -180,5 +180,82 @@ def privacy_policy():
 def terms_conditions():
     return render_template("support/terms_conditions.html")
 
+@app.route("/api/chat", methods=["POST"])
+def chat():
+    data = request.get_json()
+    user_message = data.get("message", "").lower().strip()
+    
+    if not user_message:
+        return jsonify({"response": "I didn't quite catch that. Could you repeat?"})
+
+    bot_response = get_bot_response(user_message)
+    return jsonify({"response": bot_response})
+
+def get_bot_response(message):
+    # Expanded Knowledge Base / FAQ
+    faqs = {
+        "services": "At Phoenix Pixels Studios, we specialize in Web Development, smart IoT Solutions, scalable Cloud Infrastructure, and Technical Consulting.",
+        "web": "We build everything from landing pages to complex e-commerce sites using technologies like React and Python. Standard websites start from ₹6,999 and usually take 7-10 days.",
+        "iot": "Our IoT expertise includes ESP32/Arduino automation, industrial sensor monitoring, and real-time data dashboards. We bridge the gap between hardware and software.",
+        "cloud": "We handle AWS/Azure deployments, database management (Supabase/PostgreSQL), and server scaling to ensure your app stays fast and secure.",
+        "pricing": "We have three main tiers: Standard (₹6,999), Premium (₹14,999), and Custom (from ₹24,999). Every project is tailored to your business needs.",
+        "contact": "You can email us at phoenixpixelsinc@gmail.com, or fill out the form on our Contact Us page. We typically respond within 24 hours.",
+        "hiring": "We're currently looking for talented Frontend Interns and Backend Developers. If you're passionate about tech, send your resume via the Careers page!",
+        "about": "Phoenix Pixels Studios is a registered Indian startup (MSME Certified) dedicated to transforming ideas into digital reality with a focus on quality and innovation.",
+        "process": "Our process is simple: 1. Consultation -> 2. Design Mockup -> 3. Development -> 4. Testing -> 5. Deployment. We keep you updated at every step!",
+        "timeline": "A typical landing page takes 3-5 days, while full business websites usually take 10-15 days. Complex IoT or Cloud projects vary based on requirements.",
+        "tech": "We use modern tech stacks like React.js, Python Flask, Node.js, Supabase for backend, and ESP32 for IoT hardware projects.",
+        "location": "We are based in India and operate as a registered startup, serving clients globally.",
+    }
+
+    # Intent Detection & Responses
+    if any(k in message for k in ["hello", "hi", "hey", "greetings"]):
+        return "Hello! I'm the Phoenix Assistant. I can help you with questions about our services, pricing, or your next digital project. What's on your mind?"
+    
+    if any(k in message for k in ["service", "what do you do", "provide", "offer"]):
+        return faqs["services"]
+    
+    if any(k in message for k in ["web", "website", "application", "ui", "ux"]):
+        return faqs["web"]
+    
+    if any(k in message for k in ["iot", "smart", "automation", "hardware", "arduino", "esp32"]):
+        return faqs["iot"]
+    
+    if any(k in message for k in ["cloud", "aws", "server", "azure", "database", "hosting"]):
+        return faqs["cloud"]
+    
+    if any(k in message for k in ["price", "cost", "how much", "budget", "package", "plan", "pricing"]):
+        return faqs["pricing"]
+    
+    if any(k in message for k in ["contact", "email", "phone", "reach", "support", "talk"]):
+        return faqs["contact"]
+    
+    if any(k in message for k in ["job", "career", "hiring", "intern", "developer", "recruit"]):
+        return faqs["hiring"]
+    
+    if any(k in message for k in ["who are you", "what is phoenix", "company", "startup", "info"]):
+        return faqs["about"]
+
+    if any(k in message for k in ["how do you work", "process", "steps", "workflow"]):
+        return faqs["process"]
+
+    if any(k in message for k in ["time", "how long", "duration", "days", "weeks"]):
+        return faqs["timeline"]
+
+    if any(k in message for k in ["tech", "language", "stack", "use", "platform"]):
+        return faqs["tech"]
+
+    if any(k in message for k in ["location", "where", "india", "based"]):
+        return faqs["location"]
+
+    if any(k in message for k in ["thank", "thanks", "great", "cool"]):
+        return "You're welcome! We love helping businesses grow. Is there anything else you'd like to know about Phoenix Pixels Studios?"
+
+    # Handling non-company gossip/chat
+    if any(k in message for k in ["weather", "news", "movie", "game", "joke", "love", "hobby", "sport"]):
+        return "I'm specialized in assisting with Phoenix Pixels Studios services! I'd love to chat about your next web project, IoT idea, or our technical services instead. What can we build for you?"
+
+    return "I'm here to help with anything regarding Phoenix Pixels Studios! You can ask me about our packages, the technologies we use, or our development process. What would you like to explore?"
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

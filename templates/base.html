@@ -32,27 +32,30 @@
 <body>
 
     <nav>
-        <div class="nav-logo">
-            <a href="{{ url_for('home') }}">
-                <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
-                <span class="mobile-brand-name">Phoenix Pixels Studios</span>
-            </a>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="{{ url_for('home') }}">
+                    <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+                    <span class="mobile-brand-name">Phoenix Pixels Studios</span>
+                </a>
+            </div>
+
+            <ul class="nav-link">
+                <li id="link0" class="link0"><a href="{{ url_for('home') }}#hero">Home</a></li>
+                <li id="link1" class="link1"><a href="{{ url_for('home') }}#what-we-do">Services</a></li>
+                <li id="link2" class="link2"><a href="{{ url_for('home') }}#projects">Projects</a></li>
+                <li id="link3" class="link3"><a href="{{ url_for('home') }}#pricing">Pricing</a></li>
+                <li id="link4" class="link4"><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <button class="btn"><a href="{{ url_for('contact_page') }}">Contact Me</a></button>
         </div>
-
-        <ul class="nav-link">
-            <li id="link0" class="link0"><a href="{{ url_for('home') }}#hero">Home</a></li>
-            <li id="link1" class="link1"><a href="{{ url_for('home') }}#what-we-do">Services</a></li>
-            <li id="link2" class="link2"><a href="{{ url_for('home') }}#pricing">Pricing</a></li>
-            <li id="link3" class="link3"><a href="{{ url_for('about') }}">About</a></li>
-        </ul>
-
-        <button class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-        <button class="btn"><a href="{{ url_for('contact_page') }}">Contact Me</a></button>
     </nav>
 
     {% block content %}{% endblock %}
@@ -90,6 +93,7 @@
         <div class="column">
             <h4>Company</h4>
             <a href="{{ url_for('about') }}">About Us</a>
+            <a href="{{ url_for('home') }}#projects">Our Projects</a>
             <a href="{{ url_for('partners') }}">Partners</a>
             <a href="{{ url_for('sponsors') }}">Sponsors</a>
             <a href="{{ url_for('careers') }}">Careers</a>
@@ -105,6 +109,38 @@
     <div class="copyright">
         <p>MSME Registered (Udyam) | Shop Act Certified Business</p>
         <p>© 2025 Phoenix Pixels Studios. All Rights Reserved.</p>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-wrapper">
+        <button class="chatbot-toggle" id="chatbotToggle">
+            <i class="fa-solid fa-message"></i>
+        </button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="bot-info">
+                    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Bot Logo">
+                    <div>
+                        <h4>Phoenix Assistant</h4>
+                        <span class="status">Online</span>
+                    </div>
+                </div>
+                <button class="close-chat" id="closeChat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot">
+                    Hello! Welcome to Phoenix Pixels Studios. How can I help you today?
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message...">
+                <button id="sendChat">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

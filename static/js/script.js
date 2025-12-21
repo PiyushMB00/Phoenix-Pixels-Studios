@@ -229,3 +229,66 @@ document.addEventListener("DOMContentLoaded", function () {
 //       showPopup('Network error. Please try again.', 'error');
 //     }
 //   });
+
+// AI Chatbot Logic
+const chatbotToggle = document.getElementById("chatbotToggle");
+const chatbotWindow = document.getElementById("chatbotWindow");
+const closeChat = document.getElementById("closeChat");
+const chatbotInput = document.getElementById("chatbotInput");
+const sendChat = document.getElementById("sendChat");
+const chatbotMessages = document.getElementById("chatbotMessages");
+
+chatbotToggle.addEventListener("click", () => {
+  chatbotWindow.classList.toggle("active");
+  if (chatbotWindow.classList.contains("active")) {
+    chatbotInput.focus();
+  }
+});
+
+closeChat.addEventListener("click", () => {
+  chatbotWindow.classList.remove("active");
+});
+
+function appendChatMessage(sender, text) {
+  const messageDiv = document.createElement("div");
+  messageDiv.className = `message ${sender}`;
+  messageDiv.textContent = text;
+  chatbotMessages.appendChild(messageDiv);
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+  return messageDiv;
+}
+
+async function handleSendMessage() {
+  const message = chatbotInput.value.trim();
+  if (!message) return;
+
+  appendChatMessage("user", message);
+  chatbotInput.value = "";
+
+  // Show Typing indicator
+  const typingIndicator = appendChatMessage("bot", "...");
+  typingIndicator.classList.add("typing");
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: message }),
+    });
+
+    const data = await response.json();
+    
+    // Remove typing indicator and show response
+    typingIndicator.remove();
+    appendChatMessage("bot", data.response);
+  } catch (error) {
+    console.error("Chat error:", error);
+    typingIndicator.remove();
+    appendChatMessage("bot", "Sorry, I'm having trouble connecting right now. Please try again later!");
+  }
+}
+
+sendChat.addEventListener("click", handleSendMessage);
+chatbotInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") handleSendMessage();
+});
