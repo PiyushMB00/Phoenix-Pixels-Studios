@@ -372,23 +372,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Track pages (Session-based for Master Explorer)
         const cleanPath = window.location.pathname;
-        if (cleanPath === "/") pages.home = true;
-        if (cleanPath.includes("about")) pages.about = true;
-        if (cleanPath.includes("contact")) pages.contact = true;
-        if (cleanPath.includes("origin")) pages.origin = true;
-        if (cleanPath.includes("web-development")) pages.web = true;
+        // Use more robust checks for path
+        if (cleanPath === "/" || cleanPath === "/index.html") pages.home = true;
+        if (cleanPath.includes("/about")) pages.about = true;
+        if (cleanPath.includes("/contact")) pages.contact = true;
+        if (cleanPath.includes("/origin")) pages.origin = true;
+        if (cleanPath.includes("/web-development")) pages.web = true;
         
         sessionStorage.setItem("phoenix_pages", JSON.stringify(pages));
         
-        // Show Readiness badge (Session based)
+        // Show Readiness badge (Session based - resets on refresh)
         if (sessionActivity.services && sessionActivity.projects && sessionActivity.pricing) {
             const badge = document.getElementById("qualityBadge");
             if (badge) badge.style.display = "block";
         }
 
-        // Show Master Explorer badge (Persistent)
+        // Show Master Explorer badge (Session based - resets on close)
         const requiredPages = ["home", "about", "contact", "origin", "web"];
-        const allVisited = requiredPages.every(p => pages[p]);
+        // Check if all required pages are true
+        const allVisited = requiredPages.every(p => pages[p] === true);
+        
         if (allVisited) {
             const explorerBadge = document.getElementById("explorerBadge");
             if (explorerBadge) explorerBadge.style.display = "block";
@@ -397,14 +400,21 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", trackActivity);
     trackActivity();
 
-    // 4. Returning Builder Greeting
+    // 4. Returning Builder Greeting (One-time per session)
     const heroSub = document.getElementById("heroSubheading");
     if (heroSub) {
         const lastVisit = localStorage.getItem("phoenix_last_visit");
+        const greetingShown = sessionStorage.getItem("phoenix_greeting_shown");
         const now = Date.now();
-        if (lastVisit && (now - lastVisit < 24 * 60 * 60 * 1000)) {
+        
+        // Logic: Return < 24h AND Not shown in this session yet
+        if (lastVisit && (now - lastVisit < 24 * 60 * 60 * 1000) && !greetingShown) {
             heroSub.textContent = "Good to see you again.";
+            // Mark as shown for this session so it doesn't appear on refresh
+            sessionStorage.setItem("phoenix_greeting_shown", "true");
         }
+        
+        // Update last visit for next time
         localStorage.setItem("phoenix_last_visit", now);
     }
 

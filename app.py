@@ -190,7 +190,9 @@ def chat():
     user_message = data.get("message", "").lower().strip()
     is_intent_aware = data.get("intent_aware", False)
     
-    if not user_message and not is_intent_aware:
+    is_proactive = data.get("proactive", False)
+    
+    if not user_message and not is_intent_aware and not is_proactive:
         return jsonify({"response": "I didn't quite catch that. Could you repeat?"})
 
     if is_intent_aware:
