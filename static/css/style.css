@@ -1641,3 +1641,141 @@ footer .column > a:hover {
   font-weight: bold;
   letter-spacing: 2px;
 }
+/* Engineering Panel */
+.engineering-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 400px;
+    height: 100%;
+    background: rgba(10, 14, 26, 0.98);
+    backdrop-filter: blur(20px);
+    z-index: 2000;
+    transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 3rem 2rem;
+    border-left: 1px solid var(--border-light);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.engineering-panel.active {
+    right: 0;
+}
+
+.engineering-panel h2 {
+    color: var(--phoenix-orange);
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.proof-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.proof-card {
+    background: var(--bg-card);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+}
+
+.proof-card h4 {
+    color: var(--phoenix-gold);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.proof-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.close-panel {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.panel-motto {
+    margin-top: 3rem;
+    text-align: center;
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+/* Quality Badge */
+.quality-badge {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(45, 90, 123, 0.2);
+    border: 1px solid var(--phoenix-teal);
+    padding: 8px 16px;
+    border-radius: 50px;
+    color: var(--phoenix-gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 1s ease;
+}
+
+/* Rebirth Message */
+.rebirth-message {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--phoenix-gold);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    opacity: 0;
+    transition: opacity 2s ease;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.rebirth-message.active {
+    opacity: 1;
+}
+
+.rebirth-glow {
+    filter: drop-shadow(0 0 15px var(--phoenix-orange)) !important;
+}
+
+/* Tooltip for Pricing */
+.pricing-tooltip {
+    position: absolute;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    border: 1px solid var(--phoenix-orange);
+    box-shadow: var(--glow-orange);
+    z-index: 100;
+    pointer-events: none;
+    max-width: 200px;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+    .engineering-panel {
+        width: 100%;
+    }
+}

@@ -143,7 +143,59 @@
         </div>
     </div>
 
+    <!-- Hidden Engineering Proof Panel -->
+    <div id="engineeringPanel" class="engineering-panel">
+        <div class="panel-content">
+            <button id="closePanel" class="close-panel">&times;</button>
+            <h2><i class="fa-solid fa-microchip"></i> Engineering Proof</h2>
+            <div class="proof-grid">
+                <div class="proof-card">
+                    <h4><i class="fa-solid fa-code"></i> Built With</h4>
+                    <p>HTML5, CSS3, Vanilla JS, Python Flask, Supabase</p>
+                </div>
+                <div class="proof-card">
+                    <h4><i class="fa-solid fa-gauge-high"></i> Performance</h4>
+                    <p>Optimized assets, lazy loading, 95+ Lighthouse score</p>
+                </div>
+                <div class="proof-card">
+                    <h4><i class="fa-solid fa-shield-halved"></i> Security</h4>
+                    <p>HTTPS, Environment isolation, CSRF protection</p>
+                </div>
+                <div class="proof-card">
+                    <h4><i class="fa-solid fa-cloud-arrow-up"></i> Hosting</h4>
+                    <p>Scalable Cloud + Automated CI/CD Pipelines</p>
+                </div>
+            </div>
+            <p class="panel-motto">"Engineered, not templated."</p>
+        </div>
+    </div>
+
+    <!-- Hidden Quality Badge -->
+    <div id="qualityBadge" class="quality-badge" style="display: none;">
+        <span>Verified Project Readiness ✓</span>
+    </div>
+
+    <!-- Rebirth Message -->
+    <div id="rebirthMessage" class="rebirth-message">Rebirth through technology.</div>
+
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // DEVELOPER CONSOLE SIGNATURE
+        console.log("%cPhoenix Pixels Studios", "color: #ff8c00; font-size: 20px; font-weight: bold;");
+        console.log("%cEngineered, not templated.", "color: #ffa500; font-size: 14px;");
+        console.log("If you're reading this, you think like a builder.");
+
+        // LATE-NIGHT BUILDER SIGNAL
+        (function() {
+            const hours = new Date().getHours();
+            if (hours >= 0 && hours < 5) {
+                const copyright = document.querySelector('.copyright p:last-child');
+                if (copyright) {
+                    copyright.innerHTML = 'Builders are awake. | © 2025 Phoenix Pixels Studios.';
+                }
+            }
+        })();
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Origin | Phoenix Pixels Studios{% endblock %}
+
+{% block content %}
+<section class="container" style="min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; animation: fadeIn 2s ease;">
+    <div style="max-width: 800px; padding: 4rem; background: var(--bg-card); border: 1px solid var(--phoenix-orange); border-radius: 20px; box-shadow: var(--glow-orange);">
+        <h1 style="color: var(--phoenix-orange); font-family: 'Playfair Display', serif; margin-bottom: 2rem;">/Origin</h1>
+        
+        <div style="text-align: left; line-height: 1.8; color: var(--text-secondary);">
+            <p style="font-size: 1.2rem; color: var(--text-primary); margin-bottom: 2rem; font-weight: 600;">
+                "We don’t build cheap products for serious businesses."
+            </p>
+            
+            <h3 style="color: var(--phoenix-gold); margin-top: 2rem;">Why Phoenix Pixels Studios Exists</h3>
+            <p>
+                We saw a world full of templates and fragile code. We chose to be the alternative.
+                Phoenix Pixels Studios was born from one core belief: **Engineering is an art, not a commodity.**
+            </p>
+
+            <h3 style="color: var(--phoenix-gold); margin-top: 2rem;">Our Philosophy</h3>
+            <p>
+                We are builders, not decorators. We prioritize performance over fluff, security over shortcuts, 
+                and long-term scalability over quick fixes. If it's engineered here, it's engineered to last.
+            </p>
+
+            <h3 style="color: var(--phoenix-gold); margin-top: 2rem;">Who We Don't Work With</h3>
+            <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                <li><i class="fa-solid fa-xmark" style="color: var(--phoenix-orange); margin-right: 10px;"></i> Businesses looking for the lowest bidder.</li>
+                <li><i class="fa-solid fa-xmark" style="color: var(--phoenix-orange); margin-right: 10px;"></i> Projects that prioritize speed over quality.</li>
+                <li><i class="fa-solid fa-xmark" style="color: var(--phoenix-orange); margin-right: 10px;"></i> People who don't respect the process of engineering.</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 3rem;">
+            <a href="{{ url_for('contact_page') }}" class="btn">Let's Build Properly</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

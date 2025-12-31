@@ -277,18 +277,133 @@ async function handleSendMessage() {
     });
 
     const data = await response.json();
-    
+
     // Remove typing indicator and show response
     typingIndicator.remove();
     appendChatMessage("bot", data.response);
   } catch (error) {
     console.error("Chat error:", error);
     typingIndicator.remove();
-    appendChatMessage("bot", "Sorry, I'm having trouble connecting right now. Please try again later!");
+    appendChatMessage(
+      "bot",
+      "Sorry, I'm having trouble connecting right now. Please try again later!"
+    );
   }
 }
 
 sendChat.addEventListener("click", handleSendMessage);
 chatbotInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") handleSendMessage();
+});
+// ELITE FEATURES & EASTER EGGS
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Hidden Engineering Proof Panel (3-click logo)
+  const logo = document.querySelector(".nav-logo img");
+  const panel = document.getElementById("engineeringPanel");
+  const closePanel = document.getElementById("closePanel");
+  let logoClicks = 0;
+
+  if (logo && panel) {
+    logo.addEventListener("click", (e) => {
+      e.preventDefault();
+      logoClicks++;
+      if (logoClicks === 3) {
+        panel.classList.add("active");
+        logoClicks = 0;
+      }
+      setTimeout(() => {
+        if (logoClicks > 0) logoClicks = 0;
+      }, 2000);
+    });
+  }
+
+  if (closePanel) {
+    closePanel.addEventListener("click", () =>
+      panel.classList.remove("active")
+    );
+  }
+
+  // 2. Pricing Justification (Hover tooltip)
+  const pricingCards = document.querySelectorAll(".pricing .card");
+  pricingCards.forEach((card) => {
+    let hoverTimer;
+    card.addEventListener("mouseenter", () => {
+      hoverTimer = setTimeout(() => {
+        const tooltip = document.createElement("div");
+        tooltip.className = "pricing-tooltip";
+        tooltip.textContent =
+          "This price reflects real engineering time, not templates.";
+        card.appendChild(tooltip);
+
+        // Position tooltip
+        tooltip.style.bottom = "20px";
+        tooltip.style.left = "50%";
+        tooltip.style.transform = "translateX(-50%)";
+      }, 4000);
+    });
+    card.addEventListener("mouseleave", () => {
+      clearTimeout(hoverTimer);
+      const tooltip = card.querySelector(".pricing-tooltip");
+      if (tooltip) tooltip.remove();
+    });
+  });
+
+  // 3. Hidden Quality Badge (Tracking)
+  const trackActivity = () => {
+    const path = window.location.hash || window.location.pathname;
+    let activity = JSON.parse(localStorage.getItem("phoenix_activity") || "{}");
+
+    if (path.includes("what-we-do")) activity.services = true;
+    if (path.includes("projects")) activity.projects = true;
+    if (path.includes("pricing")) activity.pricing = true;
+
+    localStorage.setItem("phoenix_activity", JSON.stringify(activity));
+
+    if (activity.services && activity.projects && activity.pricing) {
+      const badge = document.getElementById("qualityBadge");
+      if (badge) badge.style.display = "block";
+    }
+  };
+  window.addEventListener("scroll", trackActivity);
+  trackActivity();
+
+  // 4. Phoenix Rebirth Moment
+  let rebirthTriggered = false;
+  window.addEventListener("scroll", () => {
+    if (rebirthTriggered) return;
+    const scrollPos = window.innerHeight + window.scrollY;
+    const bottom = document.documentElement.scrollHeight;
+
+    if (scrollPos >= bottom - 10) {
+      rebirthTriggered = true;
+      setTimeout(() => {
+        const logoFooter = document.querySelector("footer .logo img");
+        const rebirthMsg = document.getElementById("rebirthMessage");
+        if (logoFooter) logoFooter.classList.add("rebirth-glow");
+        if (rebirthMsg) rebirthMsg.classList.add("active");
+
+        setTimeout(() => {
+          if (rebirthMsg) rebirthMsg.classList.remove("active");
+          if (logoFooter) logoFooter.classList.remove("rebirth-glow");
+        }, 4000);
+      }, 2000);
+    }
+  });
+
+  // 5. Intent-Aware Chatbot logic (Modified)
+  const startTime = Date.now();
+  let hasShownIntentMsg = false;
+
+  window.addEventListener("scroll", () => {
+    const timeSpent = (Date.now() - startTime) / 1000;
+    if (timeSpent > 120 && !hasShownIntentMsg) {
+      const isPricingPage = window.location.hash.includes("pricing");
+      if (isPricingPage) {
+        // We'll hook into the chatbot logic here if it's already open
+        // or just prepare a flag for when it opens
+        window.chatbotIntentFlag = true;
+        hasShownIntentMsg = true;
+      }
+    }
+  });
 });

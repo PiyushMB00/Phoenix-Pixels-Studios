@@ -180,13 +180,21 @@ def privacy_policy():
 def terms_conditions():
     return render_template("support/terms_conditions.html")
 
+@app.route("/origin")
+def origin():
+    return render_template("origin.html")
+
 @app.route("/api/chat", methods=["POST"])
 def chat():
     data = request.get_json()
     user_message = data.get("message", "").lower().strip()
+    is_intent_aware = data.get("intent_aware", False)
     
-    if not user_message:
+    if not user_message and not is_intent_aware:
         return jsonify({"response": "I didn't quite catch that. Could you repeat?"})
+
+    if is_intent_aware:
+        return jsonify({"response": "Looks like you’re planning something serious. Want to discuss scope and timelines?"})
 
     bot_response = get_bot_response(user_message)
     return jsonify({"response": bot_response})
