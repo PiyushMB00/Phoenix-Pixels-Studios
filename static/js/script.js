@@ -394,10 +394,15 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (allVisited) {
             const explorerBadge = document.getElementById("explorerBadge");
-            if (explorerBadge) explorerBadge.style.display = "block";
+            if (explorerBadge) {
+                explorerBadge.style.display = "block";
+                // Ensure it stacks properly
+                explorerBadge.style.marginBottom = "10px";
+            }
         }
     };
     window.addEventListener("scroll", trackActivity);
+    // Explicitly call once on load to show persistent badges if any (Master Explorer in session)
     trackActivity();
 
     // 4. Returning Builder Greeting (One-time per session)
