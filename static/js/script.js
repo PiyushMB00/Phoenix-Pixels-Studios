@@ -359,32 +359,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 3. Hidden Badges (Quality & Master Explorer)
+    let sessionActivity = { services: false, projects: false, pricing: false }; // In-memory only (resets on refresh)
+    
     const trackActivity = () => {
         const path = window.location.hash || window.location.pathname;
-        let activity = JSON.parse(localStorage.getItem("phoenix_activity") || "{}");
         let pages = JSON.parse(localStorage.getItem("phoenix_pages") || "{}");
         
-        // Track sections
-        if (path.includes("what-we-do")) activity.services = true;
-        if (path.includes("projects")) activity.projects = true;
-        if (path.includes("pricing")) activity.pricing = true;
-        localStorage.setItem("phoenix_activity", JSON.stringify(activity));
+        // Track sections (In-memory for Readiness Badge)
+        if (path.includes("what-we-do")) sessionActivity.services = true;
+        if (path.includes("projects")) sessionActivity.projects = true;
+        if (path.includes("pricing")) sessionActivity.pricing = true;
 
-        // Track pages
+        // Track pages (Persistent for Master Explorer)
         const cleanPath = window.location.pathname;
         if (cleanPath === "/") pages.home = true;
         if (cleanPath.includes("about")) pages.about = true;
         if (cleanPath.includes("contact")) pages.contact = true;
         if (cleanPath.includes("origin")) pages.origin = true;
         if (cleanPath.includes("web-development")) pages.web = true;
+        
         localStorage.setItem("phoenix_pages", JSON.stringify(pages));
         
-        // Show badges
-        if (activity.services && activity.projects && activity.pricing) {
+        // Show Readiness badge (Session based)
+        if (sessionActivity.services && sessionActivity.projects && sessionActivity.pricing) {
             const badge = document.getElementById("qualityBadge");
             if (badge) badge.style.display = "block";
         }
 
+        // Show Master Explorer badge (Persistent)
         const requiredPages = ["home", "about", "contact", "origin", "web"];
         const allVisited = requiredPages.every(p => pages[p]);
         if (allVisited) {

@@ -1716,8 +1716,9 @@ footer .column > a:hover {
 /* Quality Badge */
 .quality-badge {
     position: fixed;
-    bottom: 85px; /* Moved up to avoid chatbot */
-    right: 20px;
+    bottom: 30px; 
+    left: 30px; /* Moved to left to avoid chatbot */
+    right: auto;
     background: rgba(45, 90, 123, 0.2);
     border: 1px solid var(--phoenix-teal);
     padding: 8px 16px;
@@ -1731,7 +1732,7 @@ footer .column > a:hover {
 }
 
 .explorer-badge {
-    bottom: 125px; /* Stacked above the quality badge */
+    bottom: 75px; /* Stacked above the quality badge on the left */
     border-color: var(--phoenix-gold);
     color: var(--phoenix-orange);
 }
