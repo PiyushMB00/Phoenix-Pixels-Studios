@@ -23,11 +23,11 @@
 }
 
 .info-box {
-    background: var(--bg-card);
-    padding: 4rem;
-    border-radius: 20px;
-    border: 1px solid var(--border-subtle);
-    text-align: center;
+  background: var(--bg-card);
+  padding: 4rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-subtle);
+  text-align: center;
 }
 
 * {
@@ -1637,8 +1637,44 @@ footer .column > a:hover {
   }
 }
 
-
 .message.bot.typing {
   font-weight: bold;
   letter-spacing: 2px;
+}
+/* Map Section Styles */
+.map-section {
+  margin-top: 5rem;
+  text-align: center;
+}
+
+.map-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-family: "Playfair Display", serif;
+  color: var(--text-primary);
+}
+
+.map-container {
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 2px solid var(--border-subtle);
+  box-shadow: var(--shadow-lg);
+  transition: all 0.4s ease;
+}
+
+.map-container:hover {
+  border-color: var(--phoenix-orange);
+  box-shadow: var(--glow-orange);
+}
+
+.map-container iframe {
+  display: block;
+  filter: grayscale(1) invert(0.9) contrast(1.2); /* Premium dark map look */
+}
+
+@media (max-width: 768px) {
+  .map-section h2 {
+    font-size: 2rem;
+  }
 }

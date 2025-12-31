@@ -1,222 +1,254 @@
-{% extends "base.html" %}
-
-{% block title %}Phoenix Pixels Studios | Modern Web & IoT Solutions{% endblock %}
-
-{% block meta_description %}Phoenix Pixels Studios is a top-tier Indian startup specializing in custom web development, IoT solutions, and cloud infrastructure. Build your digital future with us.{% endblock %}
-
-{% block meta_keywords %}web development company, IoT startup India, cloud integration, custom software, Phoenix Pixels Studios{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Phoenix Pixels Studios | Modern Web &
+IoT Solutions{% endblock %} {% block meta_description %}Phoenix Pixels Studios
+is a top-tier Indian startup specializing in custom web development, IoT
+solutions, and cloud infrastructure. Build your digital future with us.{%
+endblock %} {% block meta_keywords %}web development company, IoT startup India,
+cloud integration, custom software, Phoenix Pixels Studios{% endblock %} {%
+block content %}
 <header id="hero" class="container">
-    <div class="content">
-        <span class="blur"></span>
-        <span class="blur"></span>
-        <h4>INNOVATIVE DIGITAL SOLUTIONS</h4>
-        <h1>We Build Modern <span>Websites, Apps & Digital Solutions</span></h1>
-        <p>
-            An officially registered startup delivering modern web development, IoT solutions, and cloud integration.
-            We combine creativity with strong technical skill to help businesses go digital with confidence.
-        </p>
-        <button class="btn1"><a href="{{ url_for('contact_page') }}">Start Your Project</a></button>
-    </div>
-    <div class="image">
-        <img src="{{ url_for('static', filename='images/hero_final.png') }}">
-    </div>
+  <div class="content">
+    <span class="blur"></span>
+    <span class="blur"></span>
+    <h4>INNOVATIVE DIGITAL SOLUTIONS</h4>
+    <h1>We Build Modern <span>Websites, Apps & Digital Solutions</span></h1>
+    <p>
+      An officially registered startup delivering modern web development, IoT
+      solutions, and cloud integration. We combine creativity with strong
+      technical skill to help businesses go digital with confidence.
+    </p>
+    <button class="btn1">
+      <a href="{{ url_for('contact_page') }}">Start Your Project</a>
+    </button>
+  </div>
+  <div class="image">
+    <img src="{{ url_for('static', filename='images/hero_final.png') }}" />
+  </div>
 </header>
 
 <section id="what-we-do" class="container">
-    <h2 class="header">WHAT WE DO</h2>
-    <div class="features">
-        <div class="card">
-            <span><i class="fa-solid fa-code"></i></span>
-            <h4>Web Development</h4>
-            <p>
-                Modern, responsive websites and web applications crafted with the latest technologies.
-                We build everything from simple landing pages to full business websites designed to perform fast and
-                look professional.
-                <strong>Quality-first. Secure. Mobile-ready.</strong>
-            </p>
-            <a href="{{ url_for('web_development') }}">Get Started <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-        <div class="card">
-            <span><i class="fa-solid fa-microchip"></i></span>
-            <h4>IoT Solutions</h4>
-            <p>
-                Smart device integration and systems that connect the physical and digital world.
-                We build sensor-based automation, monitoring systems, and real-time dashboards for homes and small
-                businesses.
-                <strong>Turning everyday objects into smart systems.</strong>
-            </p>
-            <a href="{{ url_for('iot_solutions') }}">Explore IoT <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-        <div class="card">
-            <span><i class="fa-solid fa-cloud"></i></span>
-            <h4>Cloud Infrastructure</h4>
-            <p>
-                Scalable cloud solutions powered by AWS, Azure, or Google Cloud.
-                We help you deploy servers, automate tasks, store data securely, and build cloud setups that grow with
-                your business.
-                <strong>Reliable. Secure. Cost-efficient.</strong>
-            </p>
-            <a href="{{ url_for('cloud_infrastructure') }}">Learn More <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-        <div class="card">
-            <span><i class="fa-solid fa-lightbulb"></i></span>
-            <h4>Technical Consulting</h4>
-            <p>
-                Clear, practical guidance on technology decisions, digital strategy, and project planning.
-                We help you choose the right tools, avoid mistakes, and move your project forward with confidence.
-                <strong>Smart solutions. Honest advice.</strong>
-            </p>
-            <a href="{{ url_for('consulting') }}">Get Advice <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
+  <h2 class="header">WHAT WE DO</h2>
+  <div class="features">
+    <div class="card">
+      <span><i class="fa-solid fa-code"></i></span>
+      <h4>Web Development</h4>
+      <p>
+        Modern, responsive websites and web applications crafted with the latest
+        technologies. We build everything from simple landing pages to full
+        business websites designed to perform fast and look professional.
+        <strong>Quality-first. Secure. Mobile-ready.</strong>
+      </p>
+      <a href="{{ url_for('web_development') }}"
+        >Get Started <i class="fa-solid fa-arrow-right"></i
+      ></a>
     </div>
+    <div class="card">
+      <span><i class="fa-solid fa-microchip"></i></span>
+      <h4>IoT Solutions</h4>
+      <p>
+        Smart device integration and systems that connect the physical and
+        digital world. We build sensor-based automation, monitoring systems, and
+        real-time dashboards for homes and small businesses.
+        <strong>Turning everyday objects into smart systems.</strong>
+      </p>
+      <a href="{{ url_for('iot_solutions') }}"
+        >Explore IoT <i class="fa-solid fa-arrow-right"></i
+      ></a>
+    </div>
+    <div class="card">
+      <span><i class="fa-solid fa-cloud"></i></span>
+      <h4>Cloud Infrastructure</h4>
+      <p>
+        Scalable cloud solutions powered by AWS, Azure, or Google Cloud. We help
+        you deploy servers, automate tasks, store data securely, and build cloud
+        setups that grow with your business.
+        <strong>Reliable. Secure. Cost-efficient.</strong>
+      </p>
+      <a href="{{ url_for('cloud_infrastructure') }}"
+        >Learn More <i class="fa-solid fa-arrow-right"></i
+      ></a>
+    </div>
+    <div class="card">
+      <span><i class="fa-solid fa-lightbulb"></i></span>
+      <h4>Technical Consulting</h4>
+      <p>
+        Clear, practical guidance on technology decisions, digital strategy, and
+        project planning. We help you choose the right tools, avoid mistakes,
+        and move your project forward with confidence.
+        <strong>Smart solutions. Honest advice.</strong>
+      </p>
+      <a href="{{ url_for('consulting') }}"
+        >Get Advice <i class="fa-solid fa-arrow-right"></i
+      ></a>
+    </div>
+  </div>
 </section>
 
 <section id="projects" class="container">
-    <h2 class="header">OUR PROJECTS</h2>
-    <p class="sub-header">
-        Explore our latest work and innovative digital solutions.
-    </p>
-    <div class="features projects-grid">
-        <div class="card">
-            <span><i class="fa-solid fa-rocket"></i></span>
-            <h4>Project Phoenix</h4>
-            <p>
-                Our flagship digital transformation platform.
-            </p>
-            <p style="color: var(--phoenix-orange); font-weight: 600;">Coming Soon...</p>
-        </div>
-        <div class="card">
-            <span><i class="fa-solid fa-laptop-code"></i></span>
-            <h4>Pixel Stream</h4>
-            <p>
-                Next-gen web application framework.
-            </p>
-            <p style="color: var(--phoenix-orange); font-weight: 600;">Coming Soon...</p>
-        </div>
-        <div class="card">
-            <span><i class="fa-solid fa-mobile-screen"></i></span>
-            <h4>Smart Pulse</h4>
-            <p>
-                Advanced IoT monitoring mobile app.
-            </p>
-            <p style="color: var(--phoenix-orange); font-weight: 600;">Coming Soon...</p>
-        </div>
+  <h2 class="header">OUR PROJECTS</h2>
+  <p class="sub-header">
+    Explore our latest work and innovative digital solutions.
+  </p>
+  <div class="features projects-grid">
+    <div class="card">
+      <span><i class="fa-solid fa-handshake-angle"></i></span>
+      <h4>Shrimant Multi Services and Facilities 79</h4>
+      <p>
+        A comprehensive service provider supplying skilled labour and
+        professional services. From expert painting and graphic design to legal
+        consultation and quality printing, we provide reliable, multi-sector
+        solutions for every need.
+      </p>
+      <p style="color: var(--phoenix-orange); font-weight: 600">
+        Service Excellence
+      </p>
     </div>
+    <div class="card">
+      <span><i class="fa-solid fa-scale-balanced"></i></span>
+      <h4>LawAid X Sanvidhan</h4>
+      <p>
+        Empowering the common citizen with legal knowledge. Our platform
+        features a comprehensive law library, an AI-powered legal assistant, and
+        an SOS Shield to protect people from exploitation by making laws and
+        rights accessible to all.
+      </p>
+      <p style="color: var(--phoenix-orange); font-weight: 600">
+        Legal Empowerment
+      </p>
+    </div>
+    <div class="card">
+      <span><i class="fa-solid fa-hotel"></i></span>
+      <h4>Hotel & Inventory Management</h4>
+      <p>
+        A robust digital solution for the hospitality industry. Streamline your
+        operations with integrated order management, real-time inventory
+        tracking, and complete administrative control designed to keep your
+        hotel running smoothly.
+      </p>
+      <p style="color: var(--phoenix-orange); font-weight: 600">
+        Smart Hospitality
+      </p>
+    </div>
+  </div>
 </section>
 
 <section id="pricing" class="container">
-    <h2 class="header">PRICING PACKAGES</h2>
-    <p class="sub-header">
-        All packages include responsive design, modern UI, SEO-ready structure, and dedicated support.
-    </p>
-    <div class="pricing">
-        <div class="card">
-            <div class="content">
-                <h4>⭐ Standard</h4>
-                <h3>₹6,999</h3>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    3 Professionally Designed Pages
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Fully Mobile-Responsive
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    WhatsApp Button Integration
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Contact Form Setup
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Essential Speed Optimization
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Up to 2 Revisions • Delivery: 5–7 Days
-                </p>
-            </div>
-            <button class="btn"><a href="{{ url_for('contact_page') }}">Contact Us</a></button>
-        </div>
-        <div class="card">
-            <div class="content">
-                <h4>⭐⭐ Premium</h4>
-                <h3>₹14,999</h3>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Up to 6 Pages
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Modern Animated UI + Premium Layout
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Hosting + Domain Setup
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Razorpay Payment Integration
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    WhatsApp Inquiry Automation
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Starter Store (up to 10 Products)
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Enhanced Speed Optimization
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Up to 4 Revisions • Delivery: 7–12 Days
-                </p>
-            </div>
-            <button class="btn"><a href="{{ url_for('contact_page') }}">Contact Us</a></button>
-        </div>
-        <div class="card">
-            <div class="content">
-                <h4>⭐⭐⭐ Custom</h4>
-                <h3>₹24,999+</h3>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Unlimited Pages
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Full E-commerce Store
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Custom Dashboard / API Integration
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Automation + Cloud Setup
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Any Custom Functionality
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Unlimited Revisions
-                </p>
-                <p>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Delivery Time Based on Project Scope
-                </p>
-            </div>
-            <button class="btn"><a href="{{ url_for('contact_page') }}">Contact Us</a></button>
-        </div>
+  <h2 class="header">PRICING PACKAGES</h2>
+  <p class="sub-header">
+    All packages include responsive design, modern UI, SEO-ready structure, and
+    dedicated support.
+  </p>
+  <div class="pricing">
+    <div class="card">
+      <div class="content">
+        <h4>⭐ Standard</h4>
+        <h3>₹6,999</h3>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          3 Professionally Designed Pages
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Fully Mobile-Responsive
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          WhatsApp Button Integration
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Contact Form Setup
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Essential Speed Optimization
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Up to 2 Revisions • Delivery: 5–7 Days
+        </p>
+      </div>
+      <button class="btn">
+        <a href="{{ url_for('contact_page') }}">Contact Us</a>
+      </button>
     </div>
+    <div class="card">
+      <div class="content">
+        <h4>⭐⭐ Premium</h4>
+        <h3>₹14,999</h3>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Up to 6 Pages
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Modern Animated UI + Premium Layout
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Hosting + Domain Setup
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Razorpay Payment Integration
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          WhatsApp Inquiry Automation
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Starter Store (up to 10 Products)
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Enhanced Speed Optimization
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Up to 4 Revisions • Delivery: 7–12 Days
+        </p>
+      </div>
+      <button class="btn">
+        <a href="{{ url_for('contact_page') }}">Contact Us</a>
+      </button>
+    </div>
+    <div class="card">
+      <div class="content">
+        <h4>⭐⭐⭐ Custom</h4>
+        <h3>₹24,999+</h3>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Unlimited Pages
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Full E-commerce Store
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Custom Dashboard / API Integration
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Automation + Cloud Setup
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Any Custom Functionality
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Unlimited Revisions
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Delivery Time Based on Project Scope
+        </p>
+      </div>
+      <button class="btn">
+        <a href="{{ url_for('contact_page') }}">Contact Us</a>
+      </button>
+    </div>
+  </div>
 </section>
 {% endblock %}
