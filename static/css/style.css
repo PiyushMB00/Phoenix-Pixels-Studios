@@ -1716,7 +1716,7 @@ footer .column > a:hover {
 /* Quality Badge */
 .quality-badge {
     position: fixed;
-    bottom: 20px;
+    bottom: 85px; /* Moved up to avoid chatbot */
     right: 20px;
     background: rgba(45, 90, 123, 0.2);
     border: 1px solid var(--phoenix-teal);
@@ -1730,27 +1730,26 @@ footer .column > a:hover {
     animation: fadeIn 1s ease;
 }
 
-/* Rebirth Message */
-.rebirth-message {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--phoenix-gold);
-    font-size: 1.1rem;
-    letter-spacing: 2px;
-    opacity: 0;
-    transition: opacity 2s ease;
-    z-index: 1000;
-    pointer-events: none;
+.explorer-badge {
+    bottom: 125px; /* Stacked above the quality badge */
+    border-color: var(--phoenix-gold);
+    color: var(--phoenix-orange);
 }
 
-.rebirth-message.active {
-    opacity: 1;
+/* Unfinished Line */
+.unfinished-line {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    opacity: 0.6;
+    margin-top: 1rem;
+    font-family: inherit;
 }
 
-.rebirth-glow {
-    filter: drop-shadow(0 0 15px var(--phoenix-orange)) !important;
+.footer-fragment {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    opacity: 0.3;
+    margin-top: 0.5rem;
 }
 
 /* Tooltip for Pricing */

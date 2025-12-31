@@ -4,36 +4,36 @@
 
 {% block content %}
 <section class="container" style="min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; animation: fadeIn 2s ease;">
-    <div style="max-width: 800px; padding: 4rem; background: var(--bg-card); border: 1px solid var(--phoenix-orange); border-radius: 20px; box-shadow: var(--glow-orange);">
-        <h1 style="color: var(--phoenix-orange); font-family: 'Playfair Display', serif; margin-bottom: 2rem;">/Origin</h1>
+    <div style="max-width: 800px; padding: 4rem 2rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 24px; backdrop-filter: blur(10px);">
+        <h1 style="color: var(--phoenix-orange); font-size: 3.5rem; letter-spacing: -2px; margin-bottom: 2rem; font-weight: 800;">/Origin</h1>
         
-        <div style="text-align: left; line-height: 1.8; color: var(--text-secondary);">
-            <p style="font-size: 1.2rem; color: var(--text-primary); margin-bottom: 2rem; font-weight: 600;">
+        <div style="text-align: left; line-height: 1.6; color: var(--text-secondary); font-size: 1.05rem;">
+            <p style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 2.5rem; font-weight: 700; border-left: 4px solid var(--phoenix-orange); padding-left: 1.5rem;">
                 "We don’t build cheap products for serious businesses."
             </p>
             
-            <h3 style="color: var(--phoenix-gold); margin-top: 2rem;">Why Phoenix Pixels Studios Exists</h3>
-            <p>
-                We saw a world full of templates and fragile code. We chose to be the alternative.
-                Phoenix Pixels Studios was born from one core belief: **Engineering is an art, not a commodity.**
+            <h3 style="color: var(--phoenix-gold); margin-top: 2.5rem; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px;">The Core Belief</h3>
+            <p style="margin-bottom: 1.5rem;">
+                We saw a world saturated with templates and fragile code. We chose to be the alternative.
+                Phoenix Pixels Studios was born from one core internal truth: **Engineering is an art, not a commodity.**
             </p>
 
-            <h3 style="color: var(--phoenix-gold); margin-top: 2rem;">Our Philosophy</h3>
-            <p>
+            <h3 style="color: var(--phoenix-gold); margin-top: 2.5rem; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px;">The Engineering-First Philosophy</h3>
+            <p style="margin-bottom: 1.5rem;">
                 We are builders, not decorators. We prioritize performance over fluff, security over shortcuts, 
-                and long-term scalability over quick fixes. If it's engineered here, it's engineered to last.
+                and long-term architecture over quick hacks. If it's engineered here, it's engineered to endure.
             </p>
 
-            <h3 style="color: var(--phoenix-gold); margin-top: 2rem;">Who We Don't Work With</h3>
+            <h3 style="color: var(--phoenix-gold); margin-top: 2.5rem; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px;">Client Filtering</h3>
             <ul style="list-style: none; padding: 0; margin-top: 1rem;">
-                <li><i class="fa-solid fa-xmark" style="color: var(--phoenix-orange); margin-right: 10px;"></i> Businesses looking for the lowest bidder.</li>
-                <li><i class="fa-solid fa-xmark" style="color: var(--phoenix-orange); margin-right: 10px;"></i> Projects that prioritize speed over quality.</li>
-                <li><i class="fa-solid fa-xmark" style="color: var(--phoenix-orange); margin-right: 10px;"></i> People who don't respect the process of engineering.</li>
+                <li style="margin-bottom: 0.75rem;"><i class="fa-solid fa-xmark" style="color: var(--phoenix-orange); margin-right: 12px; opacity: 0.7;"></i> Businesses seeking the lowest bidder.</li>
+                <li style="margin-bottom: 0.75rem;"><i class="fa-solid fa-xmark" style="color: var(--phoenix-orange); margin-right: 12px; opacity: 0.7;"></i> Projects that prioritize speed over quality.</li>
+                <li style="margin-bottom: 0.75rem;"><i class="fa-solid fa-xmark" style="color: var(--phoenix-orange); margin-right: 12px; opacity: 0.7;"></i> Those who don't respect the uncompromising process of engineering.</li>
             </ul>
         </div>
         
-        <div style="margin-top: 3rem;">
-            <a href="{{ url_for('contact_page') }}" class="btn">Let's Build Properly</a>
+        <div style="margin-top: 4rem;">
+            <button class="btn" onclick="window.location.href='/contact'" style="box-shadow: none !important;">Let's Build Properly</button>
         </div>
     </div>
 </section>

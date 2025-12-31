@@ -243,8 +243,13 @@ chatbotToggle.addEventListener("click", () => {
   if (chatbotWindow.classList.contains("active")) {
     chatbotInput.focus();
     
-    // Trigger intent-aware greeting if flag is set
-    if (window.chatbotIntentFlag && !window.hasSentIntentMsg) {
+    // Proactive strategic message
+    if (window.chatbotProactiveFlag && !window.hasSentProactiveMsg) {
+        handleSendMessage(false, true); // proactive flag
+        window.hasSentProactiveMsg = true;
+    }
+    // High intent greeting
+    else if (window.chatbotIntentFlag && !window.hasSentIntentMsg) {
         handleSendMessage(true);
         window.hasSentIntentMsg = true;
     }
@@ -264,11 +269,11 @@ function appendChatMessage(sender, text) {
   return messageDiv;
 }
 
-async function handleSendMessage(intentAware = false) {
-  const message = intentAware ? "" : chatbotInput.value.trim();
-  if (!message && !intentAware) return;
+async function handleSendMessage(intentAware = false, proactive = false) {
+  const message = (intentAware || proactive) ? "" : chatbotInput.value.trim();
+  if (!message && !intentAware && !proactive) return;
 
-  if (!intentAware) appendChatMessage("user", message);
+  if (!intentAware && !proactive) appendChatMessage("user", message);
   chatbotInput.value = "";
 
   // Show Typing indicator
@@ -281,7 +286,8 @@ async function handleSendMessage(intentAware = false) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
           message: message,
-          intent_aware: intentAware
+          intent_aware: intentAware,
+          proactive: proactive
       }),
     });
 
@@ -306,113 +312,146 @@ chatbotInput.addEventListener("keypress", (e) => {
 });
 // ELITE FEATURES & EASTER EGGS
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Hidden Engineering Proof Panel (3-click logo)
-  const logo = document.querySelector(".nav-logo img");
-  const panel = document.getElementById("engineeringPanel");
-  const closePanel = document.getElementById("closePanel");
-  let logoClicks = 0;
+    // 1. Hidden Engineering Proof Panel (3-click logo)
+    const logo = document.querySelector(".nav-logo img");
+    const panel = document.getElementById("engineeringPanel");
+    const closePanel = document.getElementById("closePanel");
+    let logoClicks = 0;
 
-  if (logo && panel) {
-    logo.addEventListener("click", (e) => {
-      e.preventDefault();
-      logoClicks++;
-      if (logoClicks === 3) {
-        panel.classList.add("active");
-        logoClicks = 0;
-      }
-      setTimeout(() => {
-        if (logoClicks > 0) logoClicks = 0;
-      }, 2000);
-    });
-  }
-
-  if (closePanel) {
-    closePanel.addEventListener("click", () =>
-      panel.classList.remove("active")
-    );
-  }
-
-  // 2. Pricing Justification (Hover tooltip)
-  const pricingCards = document.querySelectorAll(".pricing .card");
-  pricingCards.forEach((card) => {
-    let hoverTimer;
-    card.addEventListener("mouseenter", () => {
-      hoverTimer = setTimeout(() => {
-        const tooltip = document.createElement("div");
-        tooltip.className = "pricing-tooltip";
-        tooltip.textContent =
-          "This price reflects real engineering time, not templates.";
-        card.appendChild(tooltip);
-
-        // Position tooltip
-        tooltip.style.bottom = "20px";
-        tooltip.style.left = "50%";
-        tooltip.style.transform = "translateX(-50%)";
-      }, 4000);
-    });
-    card.addEventListener("mouseleave", () => {
-      clearTimeout(hoverTimer);
-      const tooltip = card.querySelector(".pricing-tooltip");
-      if (tooltip) tooltip.remove();
-    });
-  });
-
-  // 3. Hidden Quality Badge (Tracking)
-  const trackActivity = () => {
-    const path = window.location.hash || window.location.pathname;
-    let activity = JSON.parse(localStorage.getItem("phoenix_activity") || "{}");
-
-    if (path.includes("what-we-do")) activity.services = true;
-    if (path.includes("projects")) activity.projects = true;
-    if (path.includes("pricing")) activity.pricing = true;
-
-    localStorage.setItem("phoenix_activity", JSON.stringify(activity));
-
-    if (activity.services && activity.projects && activity.pricing) {
-      const badge = document.getElementById("qualityBadge");
-      if (badge) badge.style.display = "block";
+    if (logo && panel) {
+        logo.addEventListener("click", (e) => {
+            e.preventDefault();
+            logoClicks++;
+            if (logoClicks === 3) {
+                panel.classList.add("active");
+                logoClicks = 0;
+            }
+            setTimeout(() => { if (logoClicks > 0) logoClicks = 0; }, 2000);
+        });
     }
-  };
-  window.addEventListener("scroll", trackActivity);
-  trackActivity();
 
-  // 4. Phoenix Rebirth Moment
-  let rebirthTriggered = false;
-  window.addEventListener("scroll", () => {
-    if (rebirthTriggered) return;
-    const scrollPos = window.innerHeight + window.scrollY;
-    const bottom = document.documentElement.scrollHeight;
-
-    if (scrollPos >= bottom - 10) {
-      rebirthTriggered = true;
-      setTimeout(() => {
-        const logoFooter = document.querySelector("footer .logo img");
-        const rebirthMsg = document.getElementById("rebirthMessage");
-        if (logoFooter) logoFooter.classList.add("rebirth-glow");
-        if (rebirthMsg) rebirthMsg.classList.add("active");
-
-        setTimeout(() => {
-          if (rebirthMsg) rebirthMsg.classList.remove("active");
-          if (logoFooter) logoFooter.classList.remove("rebirth-glow");
-        }, 4000);
-      }, 2000);
+    if (closePanel) {
+        closePanel.addEventListener("click", () => panel.classList.remove("active"));
     }
-  });
 
-  // 5. Intent-Aware Chatbot logic (Modified)
-  const startTime = Date.now();
-  let hasShownIntentMsg = false;
+    // 2. Pricing Justification (Hover tooltip)
+    const pricingCards = document.querySelectorAll(".pricing .card");
+    pricingCards.forEach(card => {
+        let hoverTimer;
+        card.addEventListener("mouseenter", () => {
+            hoverTimer = setTimeout(() => {
+                const tooltip = document.createElement("div");
+                tooltip.className = "pricing-tooltip";
+                tooltip.textContent = "This price reflects real engineering time, not templates.";
+                card.appendChild(tooltip);
+                
+                // Position tooltip
+                tooltip.style.bottom = "20px";
+                tooltip.style.left = "50%";
+                tooltip.style.transform = "translateX(-50%)";
+            }, 4000);
+        });
+        card.addEventListener("mouseleave", () => {
+            clearTimeout(hoverTimer);
+            const tooltip = card.querySelector(".pricing-tooltip");
+            if (tooltip) tooltip.remove();
+        });
+    });
 
-  window.addEventListener("scroll", () => {
-    const timeSpent = (Date.now() - startTime) / 1000;
-    if (timeSpent > 120 && !hasShownIntentMsg) {
-      const isPricingPage = window.location.hash.includes("pricing");
-      if (isPricingPage) {
-        // We'll hook into the chatbot logic here if it's already open
-        // or just prepare a flag for when it opens
-        window.chatbotIntentFlag = true;
-        hasShownIntentMsg = true;
-      }
+    // 3. Hidden Badges (Quality & Master Explorer)
+    const trackActivity = () => {
+        const path = window.location.hash || window.location.pathname;
+        let activity = JSON.parse(localStorage.getItem("phoenix_activity") || "{}");
+        let pages = JSON.parse(localStorage.getItem("phoenix_pages") || "{}");
+        
+        // Track sections
+        if (path.includes("what-we-do")) activity.services = true;
+        if (path.includes("projects")) activity.projects = true;
+        if (path.includes("pricing")) activity.pricing = true;
+        localStorage.setItem("phoenix_activity", JSON.stringify(activity));
+
+        // Track pages
+        const cleanPath = window.location.pathname;
+        if (cleanPath === "/") pages.home = true;
+        if (cleanPath.includes("about")) pages.about = true;
+        if (cleanPath.includes("contact")) pages.contact = true;
+        if (cleanPath.includes("origin")) pages.origin = true;
+        if (cleanPath.includes("web-development")) pages.web = true;
+        localStorage.setItem("phoenix_pages", JSON.stringify(pages));
+        
+        // Show badges
+        if (activity.services && activity.projects && activity.pricing) {
+            const badge = document.getElementById("qualityBadge");
+            if (badge) badge.style.display = "block";
+        }
+
+        const requiredPages = ["home", "about", "contact", "origin", "web"];
+        const allVisited = requiredPages.every(p => pages[p]);
+        if (allVisited) {
+            const explorerBadge = document.getElementById("explorerBadge");
+            if (explorerBadge) explorerBadge.style.display = "block";
+        }
+    };
+    window.addEventListener("scroll", trackActivity);
+    trackActivity();
+
+    // 4. Returning Builder Greeting
+    const heroSub = document.getElementById("heroSubheading");
+    if (heroSub) {
+        const lastVisit = localStorage.getItem("phoenix_last_visit");
+        const now = Date.now();
+        if (lastVisit && (now - lastVisit < 24 * 60 * 60 * 1000)) {
+            heroSub.textContent = "Good to see you again.";
+        }
+        localStorage.setItem("phoenix_last_visit", now);
     }
-  });
+
+    // 5. Micro-Scroll Detail (Hero Subheading)
+    window.addEventListener("scroll", () => {
+        if (window.scrollY < 200 && heroSub) {
+            const factor = 1 - (window.scrollY / 200);
+            heroSub.style.letterSpacing = `${(1 - factor) * 1}px`;
+            heroSub.style.fontWeight = 400 + (factor * 200);
+            heroSub.style.filter = `contrast(${100 + (factor * 20)}%)`;
+        }
+    });
+
+    // 6. Strategic Chatbot Message (Bottom then Hero)
+    let hasReachedBottom = false;
+    let chatbotProactiveTriggered = false;
+    window.addEventListener("scroll", () => {
+        if (chatbotProactiveTriggered) return;
+        
+        const scrollPos = window.innerHeight + window.scrollY;
+        const bottom = document.documentElement.scrollHeight;
+        
+        if (scrollPos >= bottom - 50) {
+            hasReachedBottom = true;
+        }
+        
+        if (hasReachedBottom && window.scrollY < 100) {
+            chatbotProactiveTriggered = true;
+            window.chatbotProactiveFlag = true;
+        }
+    });
+
+    // 7. The Unfinished Line (11:11)
+    const checkUnfinishedLine = () => {
+        const now = new Date();
+        const line = document.getElementById("unfinishedLine");
+        if (line) {
+            if (now.getHours() % 12 === 11 && now.getMinutes() === 11) {
+                line.style.display = "block";
+            } else {
+                line.style.display = "none";
+            }
+        }
+    };
+    setInterval(checkUnfinishedLine, 1000);
+    checkUnfinishedLine();
+
+    // 8. Hidden Sentence Across Site (Reveal logic)
+    // Only reveal all fragments if user clicks a hidden trigger or after certain interaction
+    // For now, they remain hidden in DOM as "insider" detail for someone viewing source
+    // or we can implement a subtle reveal later if requested.
 });

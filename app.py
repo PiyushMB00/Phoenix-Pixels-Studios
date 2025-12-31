@@ -196,6 +196,9 @@ def chat():
     if is_intent_aware:
         return jsonify({"response": "Looks like you’re planning something serious. Want to discuss scope and timelines?"})
 
+    if data.get("proactive", False):
+        return jsonify({"response": "You didn’t land here by accident. Want to build something that lasts?"})
+
     bot_response = get_bot_response(user_message)
     return jsonify({"response": bot_response})
 
@@ -259,9 +262,13 @@ def get_bot_response(message):
     if any(k in message for k in ["thank", "thanks", "great", "cool"]):
         return "You're welcome! We love helping businesses grow. Is there anything else you'd like to know about Phoenix Pixels Studios?"
 
-    # Handling non-company gossip/chat
-    if any(k in message for k in ["weather", "news", "movie", "game", "joke", "love", "hobby", "sport"]):
-        return "I'm specialized in assisting with Phoenix Pixels Studios services! I'd love to chat about your next web project, IoT idea, or our technical services instead. What can we build for you?"
+    # Firmness / Pricing Logic
+    if any(k in message for k in ["cheap", "lowest", "discount", "offer price", "negotiate"]):
+        return "We can build fast or build right. We don’t do cheap shortcuts. Our pricing reflects real engineering, not templates."
+
+    # Philosophy / Why Phoenix Logic
+    if any(k in message for k in ["why phoenix", "what does phoenix mean", "origin of name"]):
+        return "A phoenix doesn’t represent beauty. It represents rebuilding after failure. That’s how we approach technology—creating resilient systems that rise stronger."
 
     return "I'm here to help with anything regarding Phoenix Pixels Studios! You can ask me about our packages, the technologies we use, or our development process. What would you like to explore?"
 
