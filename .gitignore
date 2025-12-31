@@ -5,5 +5,6 @@ venv/
 .env
 
 # Secrets
+SECRETS.md
 
 
