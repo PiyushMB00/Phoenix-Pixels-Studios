@@ -1,10 +1,8 @@
-.env
+# Python
 __pycache__/
 *.py[cod]
-*$py.class
-.venv
 venv/
-ENV/
-.idea/
-.vscode/
-.DS_Store
+.env
+
+# Secrets
+SECRETS.md
