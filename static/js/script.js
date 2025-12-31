@@ -363,14 +363,14 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const trackActivity = () => {
         const path = window.location.hash || window.location.pathname;
-        let pages = JSON.parse(localStorage.getItem("phoenix_pages") || "{}");
+        let pages = JSON.parse(sessionStorage.getItem("phoenix_pages") || "{}");
         
         // Track sections (In-memory for Readiness Badge)
         if (path.includes("what-we-do")) sessionActivity.services = true;
         if (path.includes("projects")) sessionActivity.projects = true;
         if (path.includes("pricing")) sessionActivity.pricing = true;
 
-        // Track pages (Persistent for Master Explorer)
+        // Track pages (Session-based for Master Explorer)
         const cleanPath = window.location.pathname;
         if (cleanPath === "/") pages.home = true;
         if (cleanPath.includes("about")) pages.about = true;
@@ -378,7 +378,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (cleanPath.includes("origin")) pages.origin = true;
         if (cleanPath.includes("web-development")) pages.web = true;
         
-        localStorage.setItem("phoenix_pages", JSON.stringify(pages));
+        sessionStorage.setItem("phoenix_pages", JSON.stringify(pages));
         
         // Show Readiness badge (Session based)
         if (sessionActivity.services && sessionActivity.projects && sessionActivity.pricing) {
