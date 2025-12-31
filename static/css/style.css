@@ -594,6 +594,22 @@ section .header {
   gap: 2rem;
 }
 
+.service-pricing {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1200px) {
+  .service-pricing {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .service-pricing {
+    grid-template-columns: 1fr;
+  }
+}
+
 .pricing .card {
   padding: 2rem 1.75rem;
   background: var(--bg-card);
