@@ -242,6 +242,12 @@ chatbotToggle.addEventListener("click", () => {
   chatbotWindow.classList.toggle("active");
   if (chatbotWindow.classList.contains("active")) {
     chatbotInput.focus();
+    
+    // Trigger intent-aware greeting if flag is set
+    if (window.chatbotIntentFlag && !window.hasSentIntentMsg) {
+        handleSendMessage(true);
+        window.hasSentIntentMsg = true;
+    }
   }
 });
 
@@ -258,11 +264,11 @@ function appendChatMessage(sender, text) {
   return messageDiv;
 }
 
-async function handleSendMessage() {
-  const message = chatbotInput.value.trim();
-  if (!message) return;
+async function handleSendMessage(intentAware = false) {
+  const message = intentAware ? "" : chatbotInput.value.trim();
+  if (!message && !intentAware) return;
 
-  appendChatMessage("user", message);
+  if (!intentAware) appendChatMessage("user", message);
   chatbotInput.value = "";
 
   // Show Typing indicator
@@ -273,7 +279,10 @@ async function handleSendMessage() {
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: message }),
+      body: JSON.stringify({ 
+          message: message,
+          intent_aware: intentAware
+      }),
     });
 
     const data = await response.json();
