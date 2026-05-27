@@ -1803,3 +1803,224 @@ footer .column > a:hover {
         width: 100%;
     }
 }
+
+/* PPS Workshops Slider Styling */
+.workshops-slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    padding: 0 4.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.workshops-slider-wrapper {
+    overflow: hidden;
+    width: 100%;
+    padding: 1rem 0.5rem 2rem; /* padding bottom prevents shadows from clipping */
+}
+
+.workshops-slider-track {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.workshop-slide {
+    flex: 0 0 calc(33.333% - 1rem);
+    background: var(--bg-card);
+    padding: 2.25rem 1.75rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.workshop-slide::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--phoenix-orange),
+        var(--phoenix-gold)
+    );
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.workshop-slide:hover::before {
+    transform: scaleX(1);
+}
+
+.workshop-slide:hover {
+    transform: translateY(-10px);
+    background: var(--bg-tertiary);
+    border-color: var(--phoenix-orange);
+    box-shadow: var(--glow-orange);
+}
+
+.workshop-slide > span:first-of-type {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+        135deg,
+        var(--phoenix-orange),
+        var(--phoenix-gold)
+    );
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    border-radius: 14px;
+    box-shadow: var(--glow-orange);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.workshop-slide:hover > span:first-of-type {
+    transform: scale(1.15) rotate(5deg);
+}
+
+.workshop-slide h4 {
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.workshop-slide p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    font-size: 0.9rem;
+    flex-grow: 1;
+}
+
+.workshop-badge {
+    align-self: flex-start;
+    background: rgba(255, 140, 0, 0.1);
+    border: 1px solid rgba(255, 140, 0, 0.3);
+    color: var(--phoenix-gold);
+    padding: 0.35rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Slider Buttons */
+.slider-btn {
+    position: absolute;
+    top: calc(50% - 1rem);
+    transform: translateY(-50%);
+    background: rgba(21, 34, 56, 0.85);
+    border: 1px solid var(--border-light);
+    color: var(--text-primary);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    backdrop-filter: blur(8px);
+    font-size: 1rem;
+}
+
+.slider-btn:hover {
+    background: var(--phoenix-orange);
+    border-color: transparent;
+    box-shadow: var(--glow-orange);
+    color: var(--bg-primary);
+}
+
+.slider-btn:active {
+    transform: translateY(-50%) scale(0.92);
+}
+
+.slider-btn.prev {
+    left: 1rem;
+}
+
+.slider-btn.next {
+    right: 1rem;
+}
+
+/* Slider Dots */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 140, 0, 0.15);
+    border: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dot:hover {
+    background: rgba(255, 140, 0, 0.4);
+}
+
+.dot.active {
+    width: 28px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--phoenix-orange), var(--phoenix-gold));
+    border-color: transparent;
+    box-shadow: var(--glow-orange);
+}
+
+/* Responsive Workshops Slider */
+@media (max-width: 992px) {
+    .workshops-slider-container {
+        padding: 0 3.5rem;
+    }
+    .workshop-slide {
+        flex: 0 0 calc(50% - 0.75rem);
+    }
+    .slider-btn.prev {
+        left: 0.5rem;
+    }
+    .slider-btn.next {
+        right: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .workshops-slider-container {
+        padding: 0 1rem;
+        margin-top: 2rem;
+    }
+    .workshops-slider-wrapper {
+        padding-bottom: 1.5rem;
+    }
+    .workshop-slide {
+        flex: 0 0 100%;
+        padding: 2rem 1.5rem;
+    }
+    .slider-btn {
+        display: none; /* Hide buttons on mobile, rely on touch/swipe or dot navigation */
+    }
+}

@@ -1,0 +1,7 @@
+1. pip uninstall jwt
+2. pip install PyJWT
+3. pip install --upgrade supabase
+   pip install --upgrade gotrue
+4. pip list | findstr jwt 
+
+If not working make venv for it and install dependencies again

@@ -18,6 +18,8 @@ function scrollToElement(elementSelector, instance = 0) {
 const link0 = document.getElementById("link0");
 const link1 = document.getElementById("link1");
 const link2 = document.getElementById("link2");
+const link5 = document.getElementById("link5");
+const link6 = document.getElementById("link6");
 const link3 = document.getElementById("link3");
 
 link0.addEventListener("click", () => {
@@ -25,20 +27,40 @@ link0.addEventListener("click", () => {
   closeMenu();
 });
 
-link1.addEventListener("click", () => {
-  scrollToElement(".header");
-  closeMenu();
-});
+if (link1) {
+  link1.addEventListener("click", () => {
+    scrollToElement("#what-we-do");
+    closeMenu();
+  });
+}
 
-link2.addEventListener("click", () => {
-  scrollToElement(".header", 1);
-  closeMenu();
-});
+if (link2) {
+  link2.addEventListener("click", () => {
+    scrollToElement("#projects");
+    closeMenu();
+  });
+}
 
-link3.addEventListener("click", () => {
-  scrollToElement(".column");
-  closeMenu();
-});
+if (link5) {
+  link5.addEventListener("click", () => {
+    scrollToElement("#college-projects");
+    closeMenu();
+  });
+}
+
+if (link6) {
+  link6.addEventListener("click", () => {
+    scrollToElement("#workshops");
+    closeMenu();
+  });
+}
+
+if (link3) {
+  link3.addEventListener("click", () => {
+    scrollToElement("#pricing");
+    closeMenu();
+  });
+}
 
 // Sticky navigation scroll effect
 const nav = document.querySelector("nav");
@@ -471,4 +493,186 @@ document.addEventListener("DOMContentLoaded", () => {
     // Only reveal all fragments if user clicks a hidden trigger or after certain interaction
     // For now, they remain hidden in DOM as "insider" detail for someone viewing source
     // or we can implement a subtle reveal later if requested.
+
+    // 9. PPS Workshops Slider Interactivity
+    const initWorkshopsSlider = () => {
+        const track = document.querySelector(".workshops-slider-track");
+        const prevBtn = document.querySelector(".slider-btn.prev");
+        const nextBtn = document.querySelector(".slider-btn.next");
+        const dotsContainer = document.querySelector(".slider-dots");
+        
+        if (!track) return;
+        
+        const slides = Array.from(track.children);
+        if (slides.length === 0) return;
+        
+        let currentIndex = 0;
+        let slideWidth = 0;
+        let gap = 24; // 1.5rem default gap
+        
+        // Calculate items per view dynamically based on CSS
+        const getItemsPerView = () => {
+            const width = window.innerWidth;
+            if (width <= 768) return 1;
+            if (width <= 992) return 2;
+            return 3;
+        };
+
+        const maxIndex = () => {
+            const itemsPerView = getItemsPerView();
+            return Math.max(0, slides.length - itemsPerView);
+        };
+        
+        const updateSliderPosition = () => {
+            if (!slides[0]) return;
+            slideWidth = slides[0].getBoundingClientRect().width;
+            
+            // Get computed style for gap to ensure accuracy
+            const computedStyle = window.getComputedStyle(track);
+            const computedGap = parseFloat(computedStyle.gap) || gap;
+            
+            // Limit index within bounds
+            const limitIndex = Math.min(currentIndex, maxIndex());
+            currentIndex = limitIndex;
+            
+            const offset = currentIndex * (slideWidth + computedGap);
+            track.style.transform = `translateX(-${offset}px)`;
+            
+            // Update active dot
+            const dots = dotsContainer.querySelectorAll(".dot");
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add("active");
+                } else {
+                    dot.classList.remove("active");
+                }
+            });
+
+            // Toggle arrow visibility or opacity
+            if (prevBtn) {
+                if (currentIndex === 0) {
+                    prevBtn.style.opacity = "0.3";
+                    prevBtn.style.pointerEvents = "none";
+                } else {
+                    prevBtn.style.opacity = "1";
+                    prevBtn.style.pointerEvents = "all";
+                }
+            }
+
+            if (nextBtn) {
+                if (currentIndex >= maxIndex()) {
+                    nextBtn.style.opacity = "0.3";
+                    nextBtn.style.pointerEvents = "none";
+                } else {
+                    nextBtn.style.opacity = "1";
+                    nextBtn.style.pointerEvents = "all";
+                }
+            }
+        };
+        
+        // Create Navigation Dots
+        const createDots = () => {
+            dotsContainer.innerHTML = "";
+            const totalDots = maxIndex() + 1;
+            
+            for (let i = 0; i < totalDots; i++) {
+                const dot = document.createElement("div");
+                dot.classList.add("dot");
+                if (i === currentIndex) dot.classList.add("active");
+                dot.addEventListener("click", () => {
+                    currentIndex = i;
+                    updateSliderPosition();
+                    resetAutoPlay();
+                });
+                dotsContainer.appendChild(dot);
+            }
+        };
+        
+        // Next button click
+        if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+                if (currentIndex < maxIndex()) {
+                    currentIndex++;
+                    updateSliderPosition();
+                }
+                resetAutoPlay();
+            });
+        }
+        
+        // Prev button click
+        if (prevBtn) {
+            prevBtn.addEventListener("click", () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateSliderPosition();
+                }
+                resetAutoPlay();
+            });
+        }
+        
+        // Responsive listener
+        window.addEventListener("resize", () => {
+            // Re-create dots and recalculate position as items per view might change
+            createDots();
+            updateSliderPosition();
+        });
+        
+        // Swipe/touch support
+        let startX = 0;
+        let isDragging = false;
+        
+        track.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        }, { passive: true });
+        
+        track.addEventListener("touchend", (e) => {
+            if (!isDragging) return;
+            const diffX = startX - e.changedTouches[0].clientX;
+            
+            if (Math.abs(diffX) > 50) { // threshold of 50px
+                if (diffX > 0 && currentIndex < maxIndex()) {
+                    // Swiped left, show next
+                    currentIndex++;
+                } else if (diffX < 0 && currentIndex > 0) {
+                    // Swiped right, show prev
+                    currentIndex--;
+                }
+                updateSliderPosition();
+                resetAutoPlay();
+            }
+            isDragging = false;
+        }, { passive: true });
+        
+        // Auto Play
+        let autoPlayInterval;
+        const startAutoPlay = () => {
+            autoPlayInterval = setInterval(() => {
+                const limit = maxIndex();
+                if (currentIndex < limit) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+                updateSliderPosition();
+            }, 5000); // Auto scroll every 5s
+        };
+        
+        const resetAutoPlay = () => {
+            clearInterval(autoPlayInterval);
+            startAutoPlay();
+        };
+        
+        // Pause Auto Play on Hover
+        track.addEventListener("mouseenter", () => clearInterval(autoPlayInterval));
+        track.addEventListener("mouseleave", startAutoPlay);
+        
+        // Initial setup
+        createDots();
+        // Wait slightly for layouts/images to stabilize
+        setTimeout(updateSliderPosition, 150);
+        startAutoPlay();
+    };
+    
+    initWorkshopsSlider();
 });
