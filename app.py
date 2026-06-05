@@ -27,8 +27,8 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def send_email_with_attachment(submission_data):
     if not EMAIL_SENDER or not EMAIL_PASSWORD or not EMAIL_RECEIVER:
-        print("Email credentials not set. Skipping email.")
-        return
+        print("❌ Email credentials not set. Skipping email.")
+        return False
 
     email_subject = f"New Contact Form Submission: {submission_data.get('subject')}"
     body = f"New submission from {submission_data.get('name')}.\nSee attached file for details."
@@ -52,6 +52,7 @@ def send_email_with_attachment(submission_data):
     msg.attach(attachment)
 
     try:
+        # print(f"📧 Attempting to send admin email from {EMAIL_SENDER} to {EMAIL_RECEIVER}")
         # Connect to Gmail SMTP server
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
@@ -59,13 +60,18 @@ def send_email_with_attachment(submission_data):
         text = msg.as_string()
         server.sendmail(EMAIL_SENDER, EMAIL_RECEIVER, text)
         server.quit()
-        print("Email sent successfully!")
+        # print("✅ Admin email sent successfully!")
+        return True
     except Exception as e:
-        print(f"Failed to send email: {e}")
+        print(f"❌ Failed to send admin email: {e}")
+        import traceback
+        traceback.print_exc()
+        return False
 
 def send_auto_reply(client_email, client_name):
     if not EMAIL_SENDER or not EMAIL_PASSWORD:
-        return
+        print("❌ Email credentials not set. Skipping auto-reply.")
+        return False
 
     subject = "Thank you for contacting us"
     body = f"Hello {client_name},\n\nThank you for contacting Phoenix Pixels Studio. We truly appreciate you taking the time to reach out to us and for showing interest in our services.\n\nThis is to inform you that our team has successfully received your message. We are currently reviewing the details you have shared, and one of our team members will get back to you shortly with further information or assistance as needed.\n\nIf you have any additional details to share or if your inquiry is urgent, please feel free to reply to this email. We will be happy to assist you.\n\nThank you once again for connecting with us. We look forward to working with you.\n\nRegards,\nPhoenix Pixels Studio"
@@ -77,15 +83,20 @@ def send_auto_reply(client_email, client_name):
     msg.attach(MIMEText(body, 'plain'))
 
     try:
+        # print(f"📧 Attempting to send auto-reply to {client_email}")
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(EMAIL_SENDER, EMAIL_PASSWORD)
         text = msg.as_string()
         server.sendmail(EMAIL_SENDER, client_email, text)
         server.quit()
-        print(f"Auto-reply sent to {client_email}")
+        # print(f"✅ Auto-reply sent to {client_email}")
+        return True
     except Exception as e:
-        print(f"Failed to send auto-reply: {e}")
+        print(f"❌ Failed to send auto-reply to {client_email}: {e}")
+        import traceback
+        traceback.print_exc()
+        return False
 
 @app.route("/")
 def home():

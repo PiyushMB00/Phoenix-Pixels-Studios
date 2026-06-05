@@ -84,7 +84,10 @@ block content %}
   </p>
   <div class="features projects-grid">
     <div class="card">
-      <span><i class="fa-solid fa-handshake-angle"></i></span>
+      <div class="card-img-wrapper">
+        <img src="{{ url_for('static', filename='images/Shrimant Multi Facilities and Services 79.jpg') }}" alt="Shrimant Multi Facilities and Services 79"
+          class="project-card-img">
+      </div>
       <h4>Shrimant Multi Services and Facilities 79</h4>
       <p>
         A comprehensive service provider supplying skilled labour and
@@ -94,55 +97,6 @@ block content %}
       </p>
       <p style="color: var(--phoenix-orange); font-weight: 600">
         Coming Soon...
-      </p>
-    </div>
-    <div class="card">
-      <span><i class="fa-solid fa-scale-balanced"></i></span>
-      <h4>LawAid X Sanvidhan</h4>
-      <p>
-        Empowering the common citizen with legal knowledge. Our platform
-        features a comprehensive law library, an AI-powered legal assistant, and
-        an SOS Shield to protect people from exploitation by making laws and
-        rights accessible to all.
-      </p>
-      <p style="color: var(--phoenix-orange); font-weight: 600">
-        Coming Soon...
-      </p>
-    </div>
-    <div class="card">
-      <span><i class="fa-solid fa-hotel"></i></span>
-      <h4>Hotel & Inventory Management</h4>
-      <p>
-        A robust digital solution for the hospitality industry. Streamline your
-        operations with integrated order management, real-time inventory
-        tracking, and complete administrative control designed to keep your
-        hotel running smoothly.
-      </p>
-      <p style="color: var(--phoenix-orange); font-weight: 600">
-        Coming Soon...
-      </p>
-    </div>
-  </div>
-</section>
-
-<section id="college-projects" class="container">
-  <h2 class="header">COLLEGE SPONSORED PROJECTS</h2>
-  <p class="sub-header">
-    Supporting students and researchers in turning bold concepts into reality.
-  </p>
-  <div class="features projects-grid">
-    <div class="card">
-      <div class="card-img-wrapper">
-        <img src="{{ url_for('static', filename='images/Sahyadricha Chhawa Foundation.jpg') }}"
-          alt="Sahyadricha Chhawa Foundation" class="project-card-img">
-      </div>
-      <h4>Sahyadricha Chhawa Foundation</h4>
-      <p>
-        From supporting cancer patients and orphans to giving a stage to hidden talents, we are dedicated to serving
-        humanity and preserving our rich cultural heritage.
-      </p>
-      <p style="color: var(--phoenix-orange); font-weight: 600">
-        In Development...
       </p>
     </div>
     <div class="card">
@@ -157,7 +111,73 @@ block content %}
         legal assistant, and a quick SOS Shield.
       </p>
       <p style="color: var(--phoenix-orange); font-weight: 600">
-        In Development...
+        https://github.com/PiyushMB00/LawAid-X-Sanvidhan
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-img-wrapper">
+        <img src="{{ url_for('static', filename='images/Sahyadricha Chhawa Foundation.jpg') }}"
+          alt="Sahyadricha Chhawa Foundation" class="project-card-img">
+      </div>
+      <h4>Sahyadricha Chhawa Foundation</h4>
+      <p>
+        From supporting cancer patients and orphans to giving a stage to hidden talents, we are dedicated to serving
+        humanity and preserving our rich cultural heritage.
+      </p>
+      <p style="color: var(--phoenix-orange); font-weight: 600">
+        Coming Soon...
+      </p>
+    </div>
+    <!-- <div class="card">
+      <span><i class="fa-solid fa-hotel"></i></span>
+      <h4>Hotel & Inventory Management</h4>
+      <p>
+        A robust digital solution for the hospitality industry. Streamline your
+        operations with integrated order management, real-time inventory
+        tracking, and complete administrative control designed to keep your
+        hotel running smoothly.
+      </p>
+      <p style="color: var(--phoenix-orange); font-weight: 600">
+        Coming Soon...
+      </p>
+    </div> -->
+  </div>
+</section>
+
+<section id="college-projects" class="container">
+  <h2 class="header">COLLEGE SPONSORED PROJECTS</h2>
+  <p class="sub-header">
+    Supporting students and researchers in turning bold concepts into reality.
+  </p>
+  <div class="features projects-grid">
+    <div class="card">
+      <div class="card-img-wrapper">
+        <img src="{{ url_for('static', filename='images/Brain_ai.png') }}"
+          alt="Brain AI" class="project-card-img">
+      </div>
+      <h4>Brain Disease AI</h4>
+      <p>
+        An AI-powered diagnostic tool for brain diseases. Using advanced machine learning algorithms, it analyzes
+        medical imaging data to assist healthcare professionals in early detection and accurate diagnosis of
+        neurological conditions.
+      </p>
+      <p style="color: var(--phoenix-orange); font-weight: 600">
+        https://github.com/Omkar-072/Brain-Disease-AI
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-img-wrapper">
+        <img src="{{ url_for('static', filename='images/LawAid X Sanvidhan.jpg') }}" alt="LawAid X Sanvidhan"
+          class="project-card-img">
+      </div>
+      <h4>LawAid X Sanvidhan</h4>
+      <p>
+        Empowering common citizens with legal knowledge. Our platform features a comprehensive law library, an
+        AI-powered
+        legal assistant, and a quick SOS Shield.
+      </p>
+      <p style="color: var(--phoenix-orange); font-weight: 600">
+        https://github.com/PiyushMB00/LawAid-X-Sanvidhan
       </p>
     </div>
     <div class="card">
@@ -172,7 +192,7 @@ block content %}
         style and visualize fit in real-time.
       </p>
       <p style="color: var(--phoenix-orange); font-weight: 600">
-        In Development...
+        https://piyushmb00.github.io/Dressify-AI/
       </p>
     </div>
   </div>
@@ -186,8 +206,8 @@ block content %}
   <div class="workshops-slider-container">
     <button class="slider-btn prev" aria-label="Previous Slide"><i class="fa-solid fa-chevron-left"></i></button>
     <div class="workshops-slider-wrapper">
-      <div class="workshops-slider-track">
-        <div class="workshop-slide">
+      <div class="workshops-slider-track" style="display: flex; justify-content: center;">
+        <!-- <div class="workshop-slide">
           <span><i class="fa-solid fa-microchip"></i></span>
           <h4>Internet of Things (IoT) Bootcamp</h4>
           <p>
@@ -195,8 +215,8 @@ block content %}
             stream real-time data to AWS or custom Flask dashboards.
           </p>
           <span class="workshop-badge">Hands-on Lab</span>
-        </div>
-        <div class="workshop-slide">
+        </div> -->
+        <!-- <div class="workshop-slide">
           <span><i class="fa-solid fa-code"></i></span>
           <h4>Modern Full-Stack Mastery</h4>
           <p>
@@ -213,8 +233,8 @@ block content %}
             applications reliably with 99.9% uptime.
           </p>
           <span class="workshop-badge">Advanced</span>
-        </div>
-        <div class="workshop-slide">
+        </div> -->
+        <!-- <div class="workshop-slide">
           <span><i class="fa-solid fa-brain"></i></span>
           <h4>AI & LLM Integration</h4>
           <p>
@@ -222,6 +242,13 @@ block content %}
             tools, and agentic workflows.
           </p>
           <span class="workshop-badge">Cutting-Edge</span>
+        </div> -->
+        <div class="workshop-slide">
+          <img src="{{ url_for('static', filename='images/Intership_Demo.jpeg') }}" alt="Web Development Internship" style="width: 100%; border-radius: 8px; margin-bottom: 15px;">
+          <h4>Web Development Internship</h4>
+          <p>
+            Join our internship program to gain hands-on experience in modern web development. Work on real projects, learn industry best practices, and build your portfolio alongside experienced developers.
+          </p>
         </div>
       </div>
     </div>
