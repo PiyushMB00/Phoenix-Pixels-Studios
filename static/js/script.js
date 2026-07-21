@@ -95,6 +95,50 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// ===== TOAST NOTIFICATION SYSTEM =====
+(function () {
+  let toastContainer = null;
+
+  function getContainer() {
+    if (!toastContainer) {
+      toastContainer = document.createElement("div");
+      toastContainer.id = "toast-container";
+      document.body.appendChild(toastContainer);
+    }
+    return toastContainer;
+  }
+
+  window.showToast = function (message, type = "success", duration = 5000) {
+    const container = getContainer();
+    const isSuccess = type === "success";
+
+    const toast = document.createElement("div");
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `
+      <div class="toast-icon">
+        <i class="fa-solid ${isSuccess ? "fa-circle-check" : "fa-circle-xmark"}"></i>
+      </div>
+      <div class="toast-body">
+        <div class="toast-title">${isSuccess ? "Message Sent!" : "Oops!"}</div>
+        <div class="toast-message">${message}</div>
+      </div>
+      <button class="toast-close" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="toast-progress" style="animation-duration: ${duration}ms;"></div>
+    `;
+
+    function dismiss() {
+      toast.classList.add("toast-exit");
+      toast.addEventListener("animationend", () => toast.remove(), { once: true });
+    }
+
+    toast.querySelector(".toast-close").addEventListener("click", dismiss);
+    container.appendChild(toast);
+    setTimeout(dismiss, duration);
+  };
+})();
+
 // Contact Form Handling
 document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.getElementById("contactForm");
@@ -115,18 +159,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       const originalBtnText = submitBtn.innerText;
-      let messageDiv = contactForm.querySelector(".form-message");
-
-      // Create message div if it doesn't exist
-      if (!messageDiv) {
-        messageDiv = document.createElement("div");
-        messageDiv.className = "form-message";
-        contactForm.appendChild(messageDiv);
-      }
-
-      // Reset message
-      messageDiv.style.display = "none";
-      messageDiv.className = "form-message";
 
       // Get form values
       const name = document.getElementById("name").value.trim();
@@ -137,71 +169,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Basic validation
       if (!name || !email || !message) {
-        showMessage(
-          "Please fill in all required fields (Name, Email, and Message)",
-          "error"
-        );
+        showToast("Please fill in all required fields (Name, Email, and Message)", "error");
         return;
       }
 
       // Email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        showMessage("Please enter a valid email address", "error");
+        showToast("Please enter a valid email address.", "error");
         return;
       }
 
       // Loading State
       submitBtn.disabled = true;
       submitBtn.classList.add("loading");
-      submitBtn.innerHTML = '<i class="fa-solid fa-spinner"></i> Sending...';
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
 
       // Send data to backend
       fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          phone: phone,
-          subject: service,
-          message: message,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, subject: service, message }),
       })
         .then((response) => response.json())
         .then((data) => {
           if (data.status === "success") {
-            showMessage(
-              "Thank you! Your message has been sent successfully. We will connect with you shortly.",
+            showToast(
+              "Thank you! Your message has been sent. We'll connect with you shortly.",
               "success"
             );
             contactForm.reset();
-            submitBtn.innerHTML = "Sent!";
-
-            setTimeout(() => {
-              resetButton();
-            }, 3000);
+            submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Sent!';
+            setTimeout(resetButton, 3000);
           } else {
-            showMessage("Error: " + data.message, "error");
+            showToast(data.message || "Something went wrong. Please try again.", "error");
             resetButton();
           }
         })
         .catch((error) => {
           console.error("Error:", error);
-          showMessage(
-            "An error occurred while sending. Please try again.",
-            "error"
-          );
+          showToast("Network error. Please check your connection and try again.", "error");
           resetButton();
         });
-
-      function showMessage(text, type) {
-        messageDiv.textContent = text;
-        messageDiv.classList.add(type);
-        messageDiv.style.display = "block";
-      }
 
       function resetButton() {
         submitBtn.disabled = false;
