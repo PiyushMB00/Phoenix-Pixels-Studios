@@ -12,6 +12,7 @@ from email.mime.base import MIMEBase
 from email import encoders
 from dotenv import load_dotenv
 from difflib import SequenceMatcher
+import requests
 
 # ===== CONFIGURATION =====
 load_dotenv()
@@ -142,77 +143,103 @@ def health_check():
         db_status = "unreachable"
     return jsonify({"status": "ok", "database": db_status}), 200
 
-def send_email_with_attachment(submission_data):
-    if not EMAIL_SENDER or not EMAIL_PASSWORD or not EMAIL_RECEIVER:
-        logger.warning("Email credentials not set. Skipping admin email.")
-        return False
+# def send_email_with_attachment(submission_data):
+#     if not EMAIL_SENDER or not EMAIL_PASSWORD or not EMAIL_RECEIVER:
+#         logger.warning("Email credentials not set. Skipping admin email.")
+#         return False
 
-    email_subject = f"New Contact Form Submission: {submission_data.get('subject')}"
-    body = f"New submission from {submission_data.get('name')}.\nSee attached file for details."
+#     email_subject = f"New Contact Form Submission: {submission_data.get('subject')}"
+#     body = f"New submission from {submission_data.get('name')}.\nSee attached file for details."
 
-    msg = MIMEMultipart()
-    msg['From'] = EMAIL_SENDER
-    msg['To'] = EMAIL_RECEIVER
-    msg['Subject'] = email_subject
-    msg.attach(MIMEText(body, 'plain'))
+#     msg = MIMEMultipart()
+#     msg['From'] = EMAIL_SENDER
+#     msg['To'] = EMAIL_RECEIVER
+#     msg['Subject'] = email_subject
+#     msg.attach(MIMEText(body, 'plain'))
 
-    # Format content for the text file
-    file_content = ""
-    for key, value in submission_data.items():
-        file_content += f"{key.capitalize()}: {value}\n"
+#     # Format content for the text file
+#     file_content = ""
+#     for key, value in submission_data.items():
+#         file_content += f"{key.capitalize()}: {value}\n"
 
-    # Create attachment
-    attachment = MIMEBase('application', 'octet-stream')
-    attachment.set_payload(file_content.encode('utf-8'))
-    encoders.encode_base64(attachment)
-    attachment.add_header('Content-Disposition', 'attachment; filename="contact_submission.txt"')
-    msg.attach(attachment)
+#     # Create attachment
+#     attachment = MIMEBase('application', 'octet-stream')
+#     attachment.set_payload(file_content.encode('utf-8'))
+#     encoders.encode_base64(attachment)
+#     attachment.add_header('Content-Disposition', 'attachment; filename="contact_submission.txt"')
+#     msg.attach(attachment)
 
-    try:
-        server = smtplib.SMTP('smtp.gmail.com', 587, timeout=10)
-        server.starttls()
-        server.login(EMAIL_SENDER, EMAIL_PASSWORD)
-        text = msg.as_string()
-        server.sendmail(EMAIL_SENDER, EMAIL_RECEIVER, text)
-        server.quit()
-        logger.info(f"Admin email sent for submission from {submission_data.get('name')}")
-        return True
-    except Exception as e:
-        logger.error(f"Failed to send admin email: {e}")
-        return False
+#     try:
+#         server = smtplib.SMTP('smtp.gmail.com', 587, timeout=10)
+#         server.starttls()
+#         server.login(EMAIL_SENDER, EMAIL_PASSWORD)
+#         text = msg.as_string()
+#         server.sendmail(EMAIL_SENDER, EMAIL_RECEIVER, text)
+#         server.quit()
+#         logger.info(f"Admin email sent for submission from {submission_data.get('name')}")
+#         return True
+#     except Exception as e:
+#         logger.error(f"Failed to send admin email: {e}")
+#         return False
 
-def send_auto_reply(client_email, client_name):
-    if not EMAIL_SENDER or not EMAIL_PASSWORD:
-        logger.warning("Email credentials not set. Skipping auto-reply.")
-        return False
+# def send_auto_reply(client_email, client_name):
+#     if not EMAIL_SENDER or not EMAIL_PASSWORD:
+#         logger.warning("Email credentials not set. Skipping auto-reply.")
+#         return False
 
-    subject = "Thank you for contacting us"
-    body = f"Hello {client_name},\n\nThank you for contacting Phoenix Pixels Studio. We truly appreciate you taking the time to reach out to us and for showing interest in our services.\n\nThis is to inform you that our team has successfully received your message. We are currently reviewing the details you have shared, and one of our team members will get back to you shortly with further information or assistance as needed.\n\nIf you have any additional details to share or if your inquiry is urgent, please feel free to reply to this email. We will be happy to assist you.\n\nThank you once again for connecting with us. We look forward to working with you.\n\nRegards,\nPhoenix Pixels Studio"
+#     subject = "Thank you for contacting us"
+#     body = f"Hello {client_name},\n\nThank you for contacting Phoenix Pixels Studio. We truly appreciate you taking the time to reach out to us and for showing interest in our services.\n\nThis is to inform you that our team has successfully received your message. We are currently reviewing the details you have shared, and one of our team members will get back to you shortly with further information or assistance as needed.\n\nIf you have any additional details to share or if your inquiry is urgent, please feel free to reply to this email. We will be happy to assist you.\n\nThank you once again for connecting with us. We look forward to working with you.\n\nRegards,\nPhoenix Pixels Studio"
 
-    msg = MIMEMultipart()
-    msg['From'] = EMAIL_SENDER
-    msg['To'] = client_email
-    msg['Subject'] = subject
-    msg.attach(MIMEText(body, 'plain'))
+#     msg = MIMEMultipart()
+#     msg['From'] = EMAIL_SENDER
+#     msg['To'] = client_email
+#     msg['Subject'] = subject
+#     msg.attach(MIMEText(body, 'plain'))
 
-    try:
-        server = smtplib.SMTP('smtp.gmail.com', 587, timeout=10)
-        server.starttls()
-        server.login(EMAIL_SENDER, EMAIL_PASSWORD)
-        text = msg.as_string()
-        server.sendmail(EMAIL_SENDER, client_email, text)
-        server.quit()
-        logger.info(f"Auto-reply sent to {client_email}")
-        return True
-    except Exception as e:
-        logger.error(f"Failed to send auto-reply to {client_email}: {e}")
-        return False
+#     try:
+#         server = smtplib.SMTP('smtp.gmail.com', 587, timeout=10)
+#         server.starttls()
+#         server.login(EMAIL_SENDER, EMAIL_PASSWORD)
+#         text = msg.as_string()
+#         server.sendmail(EMAIL_SENDER, client_email, text)
+#         server.quit()
+#         logger.info(f"Auto-reply sent to {client_email}")
+#         return True
+#     except Exception as e:
+#         logger.error(f"Failed to send auto-reply to {client_email}: {e}")
+#         return False
+
+# def send_emails_in_background(submission_data, client_email, client_name):
+#     """Send both emails in a background thread so the user gets an instant response."""
+#     def _send():
+#         send_email_with_attachment(submission_data)
+#         send_auto_reply(client_email, client_name)
+#     thread = threading.Thread(target=_send, daemon=True)
+#     thread.start()
 
 def send_emails_in_background(submission_data, client_email, client_name):
-    """Send both emails in a background thread so the user gets an instant response."""
+    """Send data to Make.com Webhook in a background thread so the user gets an instant response."""
     def _send():
-        send_email_with_attachment(submission_data)
-        send_auto_reply(client_email, client_name)
+        # PASTE THE MAKE.COM URL YOUR CREATED IN PHASE 1 HERE
+        webhook_url = "https://hook.us2.make.com/q1jc42s4zd787d1fpwzu9clxqtlspq9j" 
+        
+        payload = {
+            "name": client_name,
+            "email": client_email,
+            "phone": submission_data.get('phone'),
+            "subject": submission_data.get('subject'),
+            "message": submission_data.get('message')
+        }
+        
+        try:
+            response = requests.post(webhook_url, json=payload, timeout=10)
+            if response.status_code == 200:
+                logger.info(f"Webhook sent successfully for {client_name}")
+            else:
+                logger.error(f"Webhook failed with status {response.status_code}")
+        except Exception as e:
+            logger.error(f"Failed to trigger Webhook: {e}")
+            
     thread = threading.Thread(target=_send, daemon=True)
     thread.start()
 
@@ -806,29 +833,51 @@ def _process_lead_step(session, message):
         logger.info(f"Lead collected: {lead_data.get('name')} / {lead_data.get('email')}")
         return done_msg, None
 
+# def _send_lead_email_background(lead_data):
+#     """Send collected lead data to EMAIL_RECEIVER in background."""
+#     def _send():
+#         if not EMAIL_SENDER or not EMAIL_PASSWORD or not EMAIL_RECEIVER:
+#             return
+#         try:
+#             subject = f"🔥 New Lead from Phoenix Assistant: {lead_data.get('name', 'Unknown')}"
+#             body = "New lead captured via Phoenix Assistant chatbot:\n\n"
+#             for k, v in lead_data.items():
+#                 body += f"{k.capitalize()}: {v}\n"
+#             msg = MIMEMultipart()
+#             msg['From'] = EMAIL_SENDER
+#             msg['To'] = EMAIL_RECEIVER
+#             msg['Subject'] = subject
+#             msg.attach(MIMEText(body, 'plain'))
+#             server = smtplib.SMTP('smtp.gmail.com', 587, timeout=10)
+#             server.starttls()
+#             server.login(EMAIL_SENDER, EMAIL_PASSWORD)
+#             server.sendmail(EMAIL_SENDER, EMAIL_RECEIVER, msg.as_string())
+#             server.quit()
+#             logger.info(f"Lead email sent for {lead_data.get('name')}")
+#         except Exception as e:
+#             logger.error(f"Failed to send lead email: {e}")
+#     threading.Thread(target=_send, daemon=True).start()
 def _send_lead_email_background(lead_data):
-    """Send collected lead data to EMAIL_RECEIVER in background."""
+    """Send collected chatbot lead data to Make.com Webhook in background."""
     def _send():
-        if not EMAIL_SENDER or not EMAIL_PASSWORD or not EMAIL_RECEIVER:
-            return
+        # PASTE THE EXACT SAME MAKE.COM URL HERE
+        webhook_url = "https://hook.us2.make.com/q1jc42s4zd787d1fpwzu9clxqtlspq9j" 
+        
+        # We map the chatbot data to match what Make.com expects
+        payload = {
+            "name": lead_data.get("name", "Unknown"),
+            "email": lead_data.get("email", "No Email"),
+            "phone": lead_data.get("phone", "No Phone"),
+            "subject": f"New Lead: {lead_data.get('business', 'Project')}",
+            "message": f"Requirement: {lead_data.get('requirement')}\nBudget: {lead_data.get('budget')}\nTimeline: {lead_data.get('timeline')}"
+        }
+        
         try:
-            subject = f"🔥 New Lead from Phoenix Assistant: {lead_data.get('name', 'Unknown')}"
-            body = "New lead captured via Phoenix Assistant chatbot:\n\n"
-            for k, v in lead_data.items():
-                body += f"{k.capitalize()}: {v}\n"
-            msg = MIMEMultipart()
-            msg['From'] = EMAIL_SENDER
-            msg['To'] = EMAIL_RECEIVER
-            msg['Subject'] = subject
-            msg.attach(MIMEText(body, 'plain'))
-            server = smtplib.SMTP('smtp.gmail.com', 587, timeout=10)
-            server.starttls()
-            server.login(EMAIL_SENDER, EMAIL_PASSWORD)
-            server.sendmail(EMAIL_SENDER, EMAIL_RECEIVER, msg.as_string())
-            server.quit()
-            logger.info(f"Lead email sent for {lead_data.get('name')}")
+            requests.post(webhook_url, json=payload, timeout=10)
+            logger.info(f"Lead webhook sent for {lead_data.get('name')}")
         except Exception as e:
-            logger.error(f"Failed to send lead email: {e}")
+            logger.error(f"Failed to send lead webhook: {e}")
+            
     threading.Thread(target=_send, daemon=True).start()
 
 # ===== FALLBACK RESPONSE =====
