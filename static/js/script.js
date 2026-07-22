@@ -261,28 +261,42 @@ document.addEventListener("DOMContentLoaded", function () {
 //     }
 //   });
 
-// AI Chatbot Logic
-const chatbotToggle = document.getElementById("chatbotToggle");
-const chatbotWindow = document.getElementById("chatbotWindow");
-const closeChat = document.getElementById("closeChat");
-const chatbotInput = document.getElementById("chatbotInput");
-const sendChat = document.getElementById("sendChat");
-const chatbotMessages = document.getElementById("chatbotMessages");
+// ===== VIRTUAL ASSISTANT CHATBOT =====
+
+// --- Session ID (persists for the browser session) ---
+function _getOrCreateSessionId() {
+  let sid = sessionStorage.getItem("pps_chat_session");
+  if (!sid) {
+    sid = "sess_" + Math.random().toString(36).slice(2, 11) + "_" + Date.now();
+    sessionStorage.setItem("pps_chat_session", sid);
+  }
+  return sid;
+}
+const CHAT_SESSION_ID = _getOrCreateSessionId();
+
+// --- Lead collection state ---
+let _leadPromptActive = false;
+
+// DOM refs
+const chatbotToggle    = document.getElementById("chatbotToggle");
+const chatbotWindow    = document.getElementById("chatbotWindow");
+const closeChat        = document.getElementById("closeChat");
+const chatbotInput     = document.getElementById("chatbotInput");
+const sendChat         = document.getElementById("sendChat");
+const chatbotMessages  = document.getElementById("chatbotMessages");
+const chatSuggestions  = document.getElementById("chatbotSuggestions");
+const leadPromptBar    = document.getElementById("leadPromptBar");
 
 chatbotToggle.addEventListener("click", () => {
   chatbotWindow.classList.toggle("active");
   if (chatbotWindow.classList.contains("active")) {
     chatbotInput.focus();
-    
-    // Proactive strategic message
     if (window.chatbotProactiveFlag && !window.hasSentProactiveMsg) {
-        handleSendMessage(false, true); // proactive flag
-        window.hasSentProactiveMsg = true;
-    }
-    // High intent greeting
-    else if (window.chatbotIntentFlag && !window.hasSentIntentMsg) {
-        handleSendMessage(true);
-        window.hasSentIntentMsg = true;
+      handleSendMessage(false, true);
+      window.hasSentProactiveMsg = true;
+    } else if (window.chatbotIntentFlag && !window.hasSentIntentMsg) {
+      handleSendMessage(true);
+      window.hasSentIntentMsg = true;
     }
   }
 });
@@ -291,53 +305,241 @@ closeChat.addEventListener("click", () => {
   chatbotWindow.classList.remove("active");
 });
 
-function appendChatMessage(sender, text) {
-  const messageDiv = document.createElement("div");
-  messageDiv.className = `message ${sender}`;
-  messageDiv.textContent = text;
-  chatbotMessages.appendChild(messageDiv);
-  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-  return messageDiv;
+// ===== RICH MESSAGE RENDERER =====
+function renderBotMessage(text) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "message bot";
+
+  if (!text) { wrapper.textContent = ""; return wrapper; }
+
+  // Split into lines and process
+  const lines = text.split("\n");
+  let inList = false;
+  let ul = null;
+
+  lines.forEach(line => {
+    // --- Separator ---
+    if (line.trim() === "---") {
+      if (inList) { wrapper.appendChild(ul); inList = false; ul = null; }
+      const hr = document.createElement("hr");
+      hr.className = "bot-separator";
+      wrapper.appendChild(hr);
+      return;
+    }
+
+    // --- Bullet points ---
+    const bulletMatch = line.match(/^[•\-\*]\s+(.+)/);
+    if (bulletMatch) {
+      if (!inList) { ul = document.createElement("ul"); inList = true; }
+      const li = document.createElement("li");
+      li.innerHTML = _parseInline(bulletMatch[1]);
+      ul.appendChild(li);
+      return;
+    } else {
+      if (inList) { wrapper.appendChild(ul); inList = false; ul = null; }
+    }
+
+    // --- Numbered list ---
+    const numMatch = line.match(/^(\d+)\.\s+(.+)/);
+    if (numMatch) {
+      if (!inList) { ul = document.createElement("ol"); inList = true; }
+      const li = document.createElement("li");
+      li.innerHTML = _parseInline(numMatch[2]);
+      ul.appendChild(li);
+      return;
+    } else {
+      if (inList && ul && ul.tagName === "OL") { wrapper.appendChild(ul); inList = false; ul = null; }
+    }
+
+    // --- Table row (pricing table) ---
+    if (line.startsWith("|") && line.endsWith("|")) {
+      if (inList) { wrapper.appendChild(ul); inList = false; ul = null; }
+      // skip separator rows
+      if (/^\|[-|\s]+\|$/.test(line.replace(/\s/g, ""))) return;
+      const cells = line.split("|").filter(c => c.trim() !== "");
+      const tr = document.createElement("tr");
+      cells.forEach(cell => {
+        const td = document.createElement("td");
+        td.innerHTML = _parseInline(cell.trim());
+        tr.appendChild(td);
+      });
+      // find or create table
+      let tbl = wrapper.querySelector("table.bot-table");
+      if (!tbl) {
+        const tblWrap = document.createElement("div");
+        tblWrap.className = "bot-table-wrapper";
+        tbl = document.createElement("table");
+        tbl.className = "bot-table";
+        tblWrap.appendChild(tbl);
+        wrapper.appendChild(tblWrap);
+      }
+      tbl.appendChild(tr);
+      return;
+    }
+
+    // --- Empty line ---
+    if (line.trim() === "") {
+      if (inList) { wrapper.appendChild(ul); inList = false; ul = null; }
+      wrapper.appendChild(document.createElement("br"));
+      return;
+    }
+
+    // --- Regular paragraph with inline formatting ---
+    if (inList) { wrapper.appendChild(ul); inList = false; ul = null; }
+
+    // Title lines: start with ** emoji pattern
+    const titleMatch = line.match(/^\*\*([^*]+)\*\*$/);
+    if (titleMatch) {
+      const title = document.createElement("div");
+      title.className = "bot-title";
+      title.innerHTML = _parseInline(line);
+      wrapper.appendChild(title);
+      return;
+    }
+
+    const p = document.createElement("p");
+    p.innerHTML = _parseInline(line);
+    wrapper.appendChild(p);
+  });
+
+  if (inList && ul) wrapper.appendChild(ul);
+  return wrapper;
 }
 
+function _parseInline(text) {
+  // **bold**
+  text = text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  // *italic*
+  text = text.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  // [text](url)
+  text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+  // bare links
+  text = text.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+  return text;
+}
+
+// ===== SUGGESTION CHIPS =====
+function renderSuggestions(suggestions) {
+  if (!chatSuggestions) return;
+  chatSuggestions.innerHTML = "";
+  if (!suggestions || suggestions.length === 0) return;
+
+  suggestions.forEach(label => {
+    const chip = document.createElement("button");
+    chip.className = "chat-chip";
+    chip.textContent = label;
+    chip.addEventListener("click", () => {
+      chatbotInput.value = label;
+      handleSendMessage();
+      chatSuggestions.innerHTML = "";
+    });
+    chatSuggestions.appendChild(chip);
+  });
+}
+
+// ===== LEAD PROMPT BAR =====
+function showLeadPrompt(promptText) {
+  if (!leadPromptBar) return;
+  _leadPromptActive = true;
+  leadPromptBar.innerHTML = "🎯 <strong>" + promptText.replace(/\*\*/g, "") + "</strong>";
+  leadPromptBar.style.display = "block";
+  chatbotInput.placeholder = "Type your answer...";
+  chatbotInput.focus();
+}
+
+function clearLeadPrompt() {
+  if (!leadPromptBar) return;
+  _leadPromptActive = false;
+  leadPromptBar.style.display = "none";
+  leadPromptBar.innerHTML = "";
+  chatbotInput.placeholder = "Type your message...";
+}
+
+// ===== APPEND USER MESSAGE =====
+function appendUserMessage(text) {
+  const div = document.createElement("div");
+  div.className = "message user";
+  div.textContent = text;
+  chatbotMessages.appendChild(div);
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+
+// ===== TYPING INDICATOR =====
+function showTypingIndicator() {
+  const div = document.createElement("div");
+  div.className = "message bot typing";
+  div.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+  chatbotMessages.appendChild(div);
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+  return div;
+}
+
+// ===== MAIN SEND HANDLER =====
 async function handleSendMessage(intentAware = false, proactive = false) {
   const message = (intentAware || proactive) ? "" : chatbotInput.value.trim();
   if (!message && !intentAware && !proactive) return;
 
-  if (!intentAware && !proactive) appendChatMessage("user", message);
+  if (!intentAware && !proactive) {
+    appendUserMessage(message);
+    if (_leadPromptActive) clearLeadPrompt();
+  }
   chatbotInput.value = "";
+  if (chatSuggestions) chatSuggestions.innerHTML = "";
 
-  // Show Typing indicator
-  const typingIndicator = appendChatMessage("bot", "...");
-  typingIndicator.classList.add("typing");
+  const typingIndicator = showTypingIndicator();
 
   try {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-          message: message,
+    // Minimum realistic delay (600ms)
+    const [response] = await Promise.all([
+      fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message,
+          session_id: CHAT_SESSION_ID,
           intent_aware: intentAware,
-          proactive: proactive
+          proactive,
+        }),
       }),
-    });
+      new Promise(r => setTimeout(r, 600))
+    ]);
 
     const data = await response.json();
-
-    // Remove typing indicator and show response
     typingIndicator.remove();
-    appendChatMessage("bot", data.response);
+
+    // Render main response (rich text)
+    if (data.response) {
+      const msgEl = renderBotMessage(data.response);
+      chatbotMessages.appendChild(msgEl);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    // Handle lead collection prompt
+    if (data.lead_prompt) {
+      // Show a bot message asking the lead question
+      const leadMsg = renderBotMessage(data.lead_prompt);
+      chatbotMessages.appendChild(leadMsg);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      showLeadPrompt(data.lead_prompt);
+    }
+
+    // Render suggestion chips
+    if (data.suggestions && data.suggestions.length > 0) {
+      renderSuggestions(data.suggestions);
+    }
+
   } catch (error) {
     console.error("Chat error:", error);
     typingIndicator.remove();
-    appendChatMessage(
-      "bot",
-      "Sorry, I'm having trouble connecting right now. Please try again later!"
+    const errMsg = renderBotMessage(
+      "Sorry, I'm having trouble connecting right now. Please try again or email us at **phoenixpixelsinc@gmail.com**."
     );
+    chatbotMessages.appendChild(errMsg);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
   }
 }
 
-sendChat.addEventListener("click", handleSendMessage);
+sendChat.addEventListener("click", () => handleSendMessage());
 chatbotInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") handleSendMessage();
 });

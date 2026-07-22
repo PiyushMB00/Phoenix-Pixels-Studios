@@ -34,14 +34,14 @@
     <nav>
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="{{ url_for('home') }}">
+                <a href="/" onclick="window.location.href='/'; return false;">
                     <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
                     <span class="mobile-brand-name">Phoenix Pixels Studios</span>
                 </a>
             </div>
 
             <ul class="nav-link">
-                <li id="link0" class="link0"><a href="{{ url_for('home') }}#hero">Home</a></li>
+                <li id="link0" class="link0"><a href="/" onclick="window.location.href='/'; return false;">Home</a></li>
                 <li id="link1" class="link1"><a href="{{ url_for('home') }}#what-we-do">Services</a></li>
                 <li id="link2" class="link2"><a href="{{ url_for('home') }}#projects">Projects</a></li>
                 <li id="link5" class="link5"><a href="{{ url_for('home') }}#college-projects">College Projects</a></li>
@@ -110,7 +110,7 @@
 
     <div class="copyright">
         <p>MSME Registered (Udyam) | Shop Act Certified Business</p>
-        <p>© 2025 Phoenix Pixels Studios. All Rights Reserved.</p>
+        <p>© {{ current_year }} Phoenix Pixels Studios. All Rights Reserved.</p>
         <div id="unfinishedLine" class="unfinished-line" style="display: none;">Not everything needs an ending.</div>
         <p class="footer-fragment" style="display: none;">Even when it’s harder.</p>
     </div>
@@ -138,6 +138,8 @@
                     Hello! Welcome to Phoenix Pixels Studios. How can I help you today?
                 </div>
             </div>
+            <div id="chatbotSuggestions" class="chat-suggestions"></div>
+            <div id="leadPromptBar" class="lead-prompt-bar" style="display:none;"></div>
             <div class="chatbot-input">
                 <input type="text" id="chatbotInput" placeholder="Type your message...">
                 <button id="sendChat">
@@ -195,7 +197,7 @@
             if (hours >= 0 && hours < 5) {
                 const copyright = document.querySelector('.copyright p:last-child');
                 if (copyright) {
-                    copyright.innerHTML = 'Builders are awake. | © 2025 Phoenix Pixels Studios.';
+                    copyright.innerHTML = 'Builders are awake. | © {{ current_year }} Phoenix Pixels Studios.';
                 }
             }
         })();
