@@ -256,6 +256,10 @@ def home():
 def contact_page():
     return render_template("ContactUs.html")
 
+@app.route("/pricing")
+def pricing():
+    return render_template("pricing.html")
+
 @app.route("/api/contact", methods=["POST"])
 def contact():
     # Rate limiting

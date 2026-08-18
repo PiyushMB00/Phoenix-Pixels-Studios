@@ -34,10 +34,8 @@ block content %}
       <span><i class="fa-solid fa-code"></i></span>
       <h4>Web Development</h4>
       <p>
-        Modern, responsive websites and web applications crafted with the latest
-        technologies. We build everything from simple landing pages to full
-        business websites designed to perform fast and look professional.
-        <strong>Quality-first. Secure. Mobile-ready.</strong>
+        Modern, responsive websites and web applications built for speed, usability, and growth.
+        <strong>Fast. Secure. Mobile ready.</strong>
       </p>
       <a href="{{ url_for('web_development') }}">Get Started <i class="fa-solid fa-arrow-right"></i></a>
     </div>
@@ -45,9 +43,7 @@ block content %}
       <span><i class="fa-solid fa-microchip"></i></span>
       <h4>IoT Solutions</h4>
       <p>
-        Smart device integration and systems that connect the physical and
-        digital world. We build sensor-based automation, monitoring systems, and
-        real-time dashboards for homes and small businesses.
+        Connect devices, sensors, and systems with smart automation, monitoring, and real time data.
         <strong>Turning everyday objects into smart systems.</strong>
       </p>
       <a href="{{ url_for('iot_solutions') }}">Explore IoT <i class="fa-solid fa-arrow-right"></i></a>
@@ -56,10 +52,8 @@ block content %}
       <span><i class="fa-solid fa-cloud"></i></span>
       <h4>Cloud Infrastructure</h4>
       <p>
-        Scalable cloud solutions powered by AWS, Azure, or Google Cloud. We help
-        you deploy servers, automate tasks, store data securely, and build cloud
-        setups that grow with your business.
-        <strong>Reliable. Secure. Cost-efficient.</strong>
+        Scalable cloud solutions using AWS, Azure, and Google Cloud for secure and reliable deployments.
+        <strong>Reliable. Secure. Cost efficient.</strong>
       </p>
       <a href="{{ url_for('cloud_infrastructure') }}">Learn More <i class="fa-solid fa-arrow-right"></i></a>
     </div>
@@ -67,9 +61,7 @@ block content %}
       <span><i class="fa-solid fa-lightbulb"></i></span>
       <h4>Technical Consulting</h4>
       <p>
-        Clear, practical guidance on technology decisions, digital strategy, and
-        project planning. We help you choose the right tools, avoid mistakes,
-        and move your project forward with confidence.
+        Practical technology guidance to help you choose the right tools, plan projects, and build smarter solutions.
         <strong>Smart solutions. Honest advice.</strong>
       </p>
       <a href="{{ url_for('consulting') }}">Get Advice <i class="fa-solid fa-arrow-right"></i></a>
@@ -82,52 +74,93 @@ block content %}
   <p class="sub-header">
     Explore our latest work and innovative digital solutions.
   </p>
-  <div class="features projects-grid">
-    <div class="card">
-      <div class="card-img-wrapper">
-        <img src="{{ url_for('static', filename='images/Shrimant Multi Facilities and Services 79.jpg') }}" alt="Shrimant Multi Facilities and Services 79"
-          class="project-card-img">
+  <div class="workshops-slider-container">
+    <button class="slider-btn prev" type="button" aria-label="Show previous projects" aria-controls="projects-slider-track">
+      <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+    </button>
+    <div class="workshops-slider-wrapper">
+      <div id="projects-slider-track" class="workshops-slider-track" aria-live="polite">
+          <article class="workshop-slide project-slide">
+            <div class="card-img-wrapper">
+              <img src="{{ url_for('static', filename='images/Shrimant Multi Facilities and Services 79.jpg') }}" alt="Shrimant Multi Facilities and Services 79"
+                class="project-card-img">
+            </div>
+            <h4>Shrimant Multi Services and Facilities 79</h4>
+            <p>
+              A comprehensive service provider supplying skilled labour and
+              professional services. From expert painting and graphic design to legal
+              consultation and quality printing, we provide reliable, multi-sector
+              solutions for every need.
+            </p>
+            <p style="color: var(--phoenix-orange); font-weight: 600">
+              Coming Soon...
+            </p>
+          </article>
+          <article class="workshop-slide project-slide">
+            <div class="card-img-wrapper">
+              <img src="{{ url_for('static', filename='images/LawAid X Sanvidhan.jpg') }}" alt="LawAid X Sanvidhan"
+                class="project-card-img">
+            </div>
+            <h4>LawAid X Sanvidhan</h4>
+            <p>
+              Empowering common citizens with legal knowledge. Our platform features a comprehensive law library, an
+              AI-powered
+              legal assistant, and a quick SOS Shield.
+            </p>
+            <p style="color: var(--phoenix-orange); font-weight: 600">
+              https://github.com/PiyushMB00/LawAid-X-Sanvidhan
+            </p>
+          </article>
+          <article class="workshop-slide project-slide">
+            <div class="card-img-wrapper">
+              <img src="{{ url_for('static', filename='images/Sahyadricha Chhawa Foundation.jpg') }}"
+                alt="Sahyadricha Chhawa Foundation" class="project-card-img">
+            </div>
+            <h4>Sahyadricha Chhawa Foundation</h4>
+            <p>
+              From supporting cancer patients and orphans to giving a stage to hidden talents, we are dedicated to serving
+              humanity and preserving our rich cultural heritage.
+            </p>
+            <p style="color: var(--phoenix-orange); font-weight: 600">
+              Coming Soon...
+            </p>
+          </article>
+          <article class="workshop-slide project-slide">
+            <div class="card-img-wrapper">
+              <img src="{{ url_for('static', filename='images/Brain_ai.png') }}"
+                alt="Brain AI" class="project-card-img">
+            </div>
+            <h4>Brain Disease AI</h4>
+            <p>
+              An AI-powered diagnostic tool for brain diseases. Using advanced machine learning algorithms, it analyzes
+              medical imaging data to assist healthcare professionals in early detection and accurate diagnosis of
+              neurological conditions.
+            </p>
+            <p style="color: var(--phoenix-orange); font-weight: 600">
+              https://github.com/Omkar-072/Brain-Disease-AI
+            </p>
+          </article>
+          <article class="workshop-slide project-slide">
+            <div class="card-img-wrapper">
+              <img src="{{ url_for('static', filename='images/Dressify AI.jpg') }}" alt="Dressify AI"
+                class="project-card-img">
+            </div>
+            <h4>Dressify AI</h4>
+            <p>
+              An AI-powered fashion tool that helps users select and virtually try out their favorite dresses. Personalize
+              your
+              style and visualize fit in real-time.
+            </p>
+            <p style="color: var(--phoenix-orange); font-weight: 600">
+              https://piyushmb00.github.io/Dressify-AI/
+            </p>
+          </article>
       </div>
-      <h4>Shrimant Multi Services and Facilities 79</h4>
-      <p>
-        A comprehensive service provider supplying skilled labour and
-        professional services. From expert painting and graphic design to legal
-        consultation and quality printing, we provide reliable, multi-sector
-        solutions for every need.
-      </p>
-      <p style="color: var(--phoenix-orange); font-weight: 600">
-        Coming Soon...
-      </p>
     </div>
-    <div class="card">
-      <div class="card-img-wrapper">
-        <img src="{{ url_for('static', filename='images/LawAid X Sanvidhan.jpg') }}" alt="LawAid X Sanvidhan"
-          class="project-card-img">
-      </div>
-      <h4>LawAid X Sanvidhan</h4>
-      <p>
-        Empowering common citizens with legal knowledge. Our platform features a comprehensive law library, an
-        AI-powered
-        legal assistant, and a quick SOS Shield.
-      </p>
-      <p style="color: var(--phoenix-orange); font-weight: 600">
-        https://github.com/PiyushMB00/LawAid-X-Sanvidhan
-      </p>
-    </div>
-    <div class="card">
-      <div class="card-img-wrapper">
-        <img src="{{ url_for('static', filename='images/Sahyadricha Chhawa Foundation.jpg') }}"
-          alt="Sahyadricha Chhawa Foundation" class="project-card-img">
-      </div>
-      <h4>Sahyadricha Chhawa Foundation</h4>
-      <p>
-        From supporting cancer patients and orphans to giving a stage to hidden talents, we are dedicated to serving
-        humanity and preserving our rich cultural heritage.
-      </p>
-      <p style="color: var(--phoenix-orange); font-weight: 600">
-        Coming Soon...
-      </p>
-    </div>
+    <button class="slider-btn next" type="button" aria-label="Show next projects" aria-controls="projects-slider-track">
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+    </button>
+    <div class="slider-dots" aria-label="Project slide navigation"></div>
     <!-- <div class="card">
       <span><i class="fa-solid fa-hotel"></i></span>
       <h4>Hotel & Inventory Management</h4>
@@ -144,7 +177,7 @@ block content %}
   </div>
 </section>
 
-<section id="college-projects" class="container">
+<!-- <section id="college-projects" class="container">
   <h2 class="header">COLLEGE SPONSORED PROJECTS</h2>
   <p class="sub-header">
     Supporting students and researchers in turning bold concepts into reality.
@@ -196,7 +229,7 @@ block content %}
       </p>
     </div>
   </div>
-</section>
+</section> -->
 
 <section id="workshops" class="container">
   <h2 class="header">PPS WORKSHOPS</h2>
@@ -258,28 +291,31 @@ block content %}
 </section>
 
 <section id="pricing" class="container">
-  <h2 class="header">PRICING PACKAGES</h2>
+  <h2 class="header">WEBSITE PACKAGES</h2>
   <p class="sub-header">
-    All packages include responsive design, modern UI, SEO-ready structure, and
-    dedicated support.
+    Professional websites with responsive design, modern UI, SEO-ready structure,
+    and dedicated support.
   </p>
-  <p class="pricing-fragment" style="display: none;">About doing it right.</p>
   <div class="pricing">
+    <!-- STANDARD -->
     <div class="card">
       <div class="content">
         <h4>⭐ Standard</h4>
-        <h3>₹6,999</h3>
+        <h3>₹6,999+</h3>
+        <p class="package-description">
+          Best for: Portfolios, personal brands & small businesses
+        </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
           3 Professionally Designed Pages
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          Fully Mobile-Responsive
+          Mobile Responsive
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          WhatsApp Button Integration
+          WhatsApp Contact Integration
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
@@ -287,95 +323,111 @@ block content %}
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          Essential Speed Optimization
+          Peformance Optimization
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
           Up to 2 Revisions • Delivery: 5–7 Days
         </p>
       </div>
-      <button class="btn">
-        <a href="{{ url_for('contact_page') }}">Contact Us</a>
-      </button>
+      <a class="btn" href="{{ url_for('contact_page') }}">
+        Contact Us
+      </a>
     </div>
+
+
+    <!-- PREMIUM -->
     <div class="card">
       <div class="content">
         <h4>⭐⭐ Premium</h4>
-        <h3>₹14,999</h3>
+        <h3>₹14,999+</h3>
+        <p class="package-description">
+          <strong>Recommended</strong><br>
+          Best for: Growing businesses & professional brands
+        </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
           Up to 6 Pages
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          Modern Animated UI + Premium Layout
+          Premium UI & Animations
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          Hosting + Domain Setup
+          Mobile Responsive
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          Razorpay Payment Integration
+          WhatsApp + Contact Form
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          WhatsApp Inquiry Automation
+          Domain & Hosting Setup  <b>*</b>
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          Starter Store (up to 10 Products)
-        </p>
-        <p>
-          <i class="fa-regular fa-circle-check"></i>
-          Enhanced Speed Optimization
+          Performance Optimization
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
           Up to 4 Revisions • Delivery: 7–12 Days
         </p>
       </div>
-      <button class="btn">
-        <a href="{{ url_for('contact_page') }}">Contact Us</a>
-      </button>
+      <a class="btn" href="{{ url_for('contact_page') }}">
+        Contact Us
+      </a>
     </div>
+
+
+    <!-- CUSTOM -->
     <div class="card">
       <div class="content">
         <h4>⭐⭐⭐ Custom</h4>
         <h3>₹24,999+</h3>
-        <p>
-          <i class="fa-regular fa-circle-check"></i>
-          Unlimited Pages
+        <p class="package-description">
+          Best for: E-commerce, platforms & custom business systems
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          Full E-commerce Store
+          Custom Page Structure
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          Custom Dashboard / API Integration
+          Custom Web Application / E-commerce
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          Automation + Cloud Setup
+          Dashboard / API Integration
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          Any Custom Functionality
+          Custom Features & Functionality
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          Unlimited Revisions
+          Automation + Cloud Setup  <b>*</b>
         </p>
         <p>
           <i class="fa-regular fa-circle-check"></i>
-          Delivery Time Based on Project Scope
+          Domain & Hosting Setup  <b>*</b>
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Revisions Based on Project Scope
+        </p>
+        <p>
+          <i class="fa-regular fa-circle-check"></i>
+          Delivery Based on Project Scope
         </p>
       </div>
-      <button class="btn">
-        <a href="{{ url_for('contact_page') }}">Contact Us</a>
-      </button>
+      <a class="btn" href="{{ url_for('contact_page') }}">
+        Contact Us
+      </a>
     </div>
   </div>
+  <p class="pricing-note">
+    Need something different? Contact us for a custom quote. <br><b>*</b>  Additional charges may apply for hosting, domain renewal, premium plugins, APIs, payment gateways, WhatsApp, email/SMS services, cloud services, automation tools, AI services, and other third party services required for your project. <br><b>Optional add ons are billed separately.</b>
+  </p>
 </section>
 {% endblock %}

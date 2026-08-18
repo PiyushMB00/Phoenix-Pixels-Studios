@@ -705,17 +705,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // For now, they remain hidden in DOM as "insider" detail for someone viewing source
     // or we can implement a subtle reveal later if requested.
 
-    // 9. PPS Workshops Slider Interactivity
-    const initWorkshopsSlider = () => {
-        const track = document.querySelector(".workshops-slider-track");
-        const prevBtn = document.querySelector(".slider-btn.prev");
-        const nextBtn = document.querySelector(".slider-btn.next");
-        const dotsContainer = document.querySelector(".slider-dots");
+    // 9. Projects slider interactivity
+    const initProjectsSlider = () => {
+        const slider = document.querySelector("#projects .workshops-slider-container");
+        if (!slider) return;
+
+        const track = slider.querySelector(".workshops-slider-track");
+        const prevBtn = slider.querySelector(".slider-btn.prev");
+        const nextBtn = slider.querySelector(".slider-btn.next");
+        const dotsContainer = slider.querySelector(".slider-dots");
         
         if (!track) return;
         
-        const slides = Array.from(track.children);
-        if (slides.length === 0) return;
+        const originalSlides = Array.from(track.children);
+        if (originalSlides.length === 0) return;
+        let slides = [];
         
         let currentIndex = 0;
         let slideWidth = 0;
@@ -729,9 +733,28 @@ document.addEventListener("DOMContentLoaded", () => {
             return 3;
         };
 
+        // Add the first visible slides to the end of the track. This lets the
+        // last project move out naturally while the first projects enter.
+        const createLoopClones = () => {
+            track.querySelectorAll("[data-slider-clone]").forEach((clone) => clone.remove());
+
+            const cloneCount = Math.min(getItemsPerView(), originalSlides.length);
+            originalSlides.slice(0, cloneCount).forEach((slide) => {
+                const clone = slide.cloneNode(true);
+                clone.setAttribute("data-slider-clone", "true");
+                clone.setAttribute("aria-hidden", "true");
+                track.appendChild(clone);
+            });
+
+            slides = Array.from(track.children);
+        };
+
+        createLoopClones();
+
         const maxIndex = () => {
-            const itemsPerView = getItemsPerView();
-            return Math.max(0, slides.length - itemsPerView);
+            // The final position contains only cloned slides. Once it has
+            // animated into view, the track can reset invisibly to index zero.
+            return originalSlides.length;
         };
         
         const updateSliderPosition = () => {
@@ -752,43 +775,33 @@ document.addEventListener("DOMContentLoaded", () => {
             // Update active dot
             const dots = dotsContainer.querySelectorAll(".dot");
             dots.forEach((dot, index) => {
-                if (index === currentIndex) {
+                if (index === currentIndex % originalSlides.length) {
                     dot.classList.add("active");
                 } else {
                     dot.classList.remove("active");
                 }
             });
 
-            // Toggle arrow visibility or opacity
+            // Previous stops at the first position; Next loops seamlessly.
             if (prevBtn) {
-                if (currentIndex === 0) {
-                    prevBtn.style.opacity = "0.3";
-                    prevBtn.style.pointerEvents = "none";
-                } else {
-                    prevBtn.style.opacity = "1";
-                    prevBtn.style.pointerEvents = "all";
-                }
+                prevBtn.disabled = currentIndex === 0;
             }
 
             if (nextBtn) {
-                if (currentIndex >= maxIndex()) {
-                    nextBtn.style.opacity = "0.3";
-                    nextBtn.style.pointerEvents = "none";
-                } else {
-                    nextBtn.style.opacity = "1";
-                    nextBtn.style.pointerEvents = "all";
-                }
+                nextBtn.disabled = currentIndex >= maxIndex();
             }
         };
         
         // Create Navigation Dots
         const createDots = () => {
             dotsContainer.innerHTML = "";
-            const totalDots = maxIndex() + 1;
+            const totalDots = originalSlides.length;
             
             for (let i = 0; i < totalDots; i++) {
-                const dot = document.createElement("div");
+                const dot = document.createElement("button");
+                dot.type = "button";
                 dot.classList.add("dot");
+                dot.setAttribute("aria-label", `Show project group ${i + 1}`);
                 if (i === currentIndex) dot.classList.add("active");
                 dot.addEventListener("click", () => {
                     currentIndex = i;
@@ -802,10 +815,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // Next button click
         if (nextBtn) {
             nextBtn.addEventListener("click", () => {
-                if (currentIndex < maxIndex()) {
-                    currentIndex++;
-                    updateSliderPosition();
-                }
+                if (currentIndex >= maxIndex()) return;
+                currentIndex += 1;
+                updateSliderPosition();
                 resetAutoPlay();
             });
         }
@@ -813,17 +825,28 @@ document.addEventListener("DOMContentLoaded", () => {
         // Prev button click
         if (prevBtn) {
             prevBtn.addEventListener("click", () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateSliderPosition();
-                }
+                if (currentIndex === 0) return;
+                currentIndex -= 1;
+                updateSliderPosition();
                 resetAutoPlay();
             });
         }
+
+        track.addEventListener("transitionend", (event) => {
+            if (event.propertyName !== "transform" || currentIndex !== maxIndex()) return;
+
+            track.style.transition = "none";
+            currentIndex = 0;
+            updateSliderPosition();
+            track.offsetHeight; // Apply the reset before restoring the transition.
+            track.style.transition = "";
+        });
         
         // Responsive listener
         window.addEventListener("resize", () => {
             // Re-create dots and recalculate position as items per view might change
+            createLoopClones();
+            currentIndex = Math.min(currentIndex, originalSlides.length - 1);
             createDots();
             updateSliderPosition();
         });
@@ -885,5 +908,5 @@ document.addEventListener("DOMContentLoaded", () => {
         startAutoPlay();
     };
     
-    initWorkshopsSlider();
+    initProjectsSlider();
 });
