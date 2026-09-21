@@ -14,26 +14,30 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Phoenix Pixels Studios | Professional Web Developers{% endblock %}</title>
-    
+    <title>{% block title %}Phoenix Pixels Studios{% endblock %}</title>
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="{% block meta_description %}Phoenix Pixels Studios is a registered Indian startup delivering modern web development, IoT systems, and cloud-powered solutions.{% endblock %}">
-    <meta name="keywords" content="{% block meta_keywords %}web development, IoT solutions, cloud infrastructure, technical consulting, software startup, Phoenix Pixels Studios{% endblock %}">
+    <meta name="description"
+          content="{% block meta_description %}Phoenix Pixels Studios is a digital solutions company founded by Piyush Bhavsar, providing web development, application development, game development, AI, IoT, cloud and software solutions.{% endblock %}">    
     <meta name="author" content="Phoenix Pixels Studios">
 
-    <!-- Open Graph / Facebook -->
+    <link rel="canonical" href="{{ request.base_url }}">
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:site_name" content="Phoenix Pixels Studios">
+    <meta property="og:url" content="{{ request.base_url }}">
     <meta property="og:title" content="{{ self.title() }}">
     <meta property="og:description" content="{{ self.meta_description() }}">
-    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='images/hero_final.png', _external=True) }}{% endblock %}">
+    <meta property="og:image"
+          content="{% block og_image %}{{ url_for('static', filename='images/hero_final.png', _external=True) }}{% endblock %}">
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
+    <!-- <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ request.url }}">
     <meta property="twitter:title" content="{{ self.title() }}">
     <meta property="twitter:description" content="{{ self.meta_description() }}">
-    <meta property="twitter:image" content="{{ self.og_image() }}">
+    <meta property="twitter:image" content="{{ self.og_image() }}"> -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">

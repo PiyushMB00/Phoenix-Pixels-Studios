@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, url_for
 from datetime import datetime
 from supabase import create_client, Client
 import os
@@ -357,6 +357,45 @@ def terms_conditions():
 @app.route("/origin")
 def origin():
     return render_template("origin.html")
+
+@app.route("/robots.txt")
+def robots_txt():
+    return """User-agent: *
+Allow: /
+
+Sitemap: https://phoenix-pixels-studios.onrender.com/sitemap.xml
+""", 200, {"Content-Type": "text/plain"}
+
+@app.route("/sitemap.xml")
+def sitemap():
+    pages = [
+        url_for("home", _external=True),
+        url_for("about", _external=True),
+        url_for("web_development", _external=True),
+        url_for("iot_solutions", _external=True),
+        url_for("cloud_infrastructure", _external=True),
+        url_for("consulting", _external=True),
+        url_for("partners", _external=True),
+        url_for("sponsors", _external=True),
+        url_for("careers", _external=True),
+        url_for("privacy_policy", _external=True),
+        url_for("terms_conditions", _external=True),
+        url_for("origin", _external=True)
+    ]
+
+    sitemap_xml = '<?xml version="1.0" encoding="UTF-8"?>'
+    sitemap_xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+
+    for page in pages:
+        sitemap_xml += f"""
+        <url>
+            <loc>{page}</loc>
+        </url>
+        """
+
+    sitemap_xml += "</urlset>"
+
+    return sitemap_xml, 200, {"Content-Type": "application/xml"}
 
 # ===== VIRTUAL ASSISTANT ENGINE =====
 # ===== SESSION STORE =====

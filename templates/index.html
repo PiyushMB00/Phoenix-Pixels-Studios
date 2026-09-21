@@ -1,10 +1,28 @@
-{% extends "base.html" %} {% block title %}Phoenix Pixels Studios | Modern Web &
-IoT Solutions{% endblock %} {% block meta_description %}Phoenix Pixels Studios
-is a top-tier Indian startup specializing in custom web development, IoT
-solutions, and cloud infrastructure. Build your digital future with us.{%
-endblock %} {% block meta_keywords %}web development company, IoT startup India,
-cloud integration, custom software, Phoenix Pixels Studios{% endblock %} {%
-block content %}
+{% extends "base.html" %} 
+{% block title %}Phoenix Pixels Studios{% endblock %}
+{% block meta_description %}Phoenix Pixels Studios is a technology studio creating software, digital products, intelligent applications, and connected systems for businesses, startups, and creators.{% endblock %}
+{%block content %}
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "{{ request.base_url }}#organization",
+    "name": "Phoenix Pixels Studios",
+    "url": "{{ request.base_url }}",
+    "logo": "{{ url_for('static', filename='images/logo.jpeg', _external=True) }}",
+    "description": "Phoenix Pixels Studios is a technology studio creating software, digital products, intelligent applications, and connected systems for businesses, startups, and creators.",
+    "founder": {
+        "@type": "Person",
+        "name": "Piyush Manoj Bhavsar"
+    },
+    "sameAs": [
+        "https://www.linkedin.com/company/phoenixpixelsstudios",
+        "https://www.instagram.com/phoenixpixelsstudios/"
+    ]
+}
+</script>
+
 <header id="hero" class="container">
   <div class="content">
     <span class="blur"></span>
